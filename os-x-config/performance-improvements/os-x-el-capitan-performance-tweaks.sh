@@ -4,6 +4,8 @@
 #  - http://www.defaults-write.com/10-terminal-commands-to-speed-up-your-mac-in-os-x-el-capitan/
 #  - https://gist.github.com/benfrain/7434600
 #  - https://github.com/drduh/
+#  - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
 
 #
 # Review the features above the ================ before you execute this file
@@ -35,6 +37,9 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # Disable the delay when you hide the Dock
 defaults write com.apple.Dock autohide-delay -float 0
 
+# Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
 # Disable the animation when you sending and replying an e-mail
 defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true
@@ -50,3 +55,18 @@ defaults write -g NSScrollAnimationEnabled -bool NO
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
