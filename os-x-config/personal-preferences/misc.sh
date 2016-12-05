@@ -1,3 +1,8 @@
+#! /usr/bin/env bash
+
+# Always show the full URL in the search/url field
+defaults write  com.apple.Safari ShowFullURLInSmartSearchField true
+
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
