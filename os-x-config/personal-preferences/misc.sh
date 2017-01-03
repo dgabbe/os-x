@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # Always show the full URL in the search/url field
-defaults write  com.apple.Safari ShowFullURLInSmartSearchField true
+defaults write  com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -17,4 +17,16 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 # Show Recovery partition
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+
+# Always show scroll bars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Expand Save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand Print menu by default
+defaults write NSGlobalDomain PMPrintingExpandedStateforPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateforPrint2 -bool true
+
 
