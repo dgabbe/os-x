@@ -5,6 +5,7 @@
 #  - https://gist.github.com/benfrain/7434600
 #  - https://github.com/drduh/
 #  - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+#  - https://gist.github.com/mbinna/2357277
 
 
 #
@@ -51,7 +52,7 @@ defaults write com.apple.Safari WebKitInitialTimedLayoutDelay 0.25
 defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Disable smooth scrolling for paging (space bar)
-defaults write -g NSScrollAnimationEnabled -bool NO
+defaults write -g NSScrollAnimationEnabled -bool false
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
