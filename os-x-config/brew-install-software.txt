@@ -1,0 +1,125 @@
+#
+# Check umask value & if running from admin account
+# check if brew-installed tag present & has a color assigned to it.
+# Write to log file or see if brew has a log file
+#
+
+# check if brew is installed
+# install brew if needed
+
+#
+# brew related
+#
+brew analytics off # personal choice
+brew tap caskroom/cask # deal w/OS X binaries & /Application
+brew install brew-cask-completion
+brew tap homebrew/completions # Optional
+brew tap buo/cask-upgrade # https://github.com/buo/homebrew-cask-upgrade
+
+#
+# shell/command-line
+#
+brew install bash bash-completion
+set +o nounset # bash completion bug, figure out how to write shell scripts!
+# Add the following lines to your ~/.bash_profile:
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+brew install tag # Optional, but I have a file tag, “brew-installed”, so I can keep track of what brew installed in /Applications
+
+#
+# Sysadmin
+#
+brew cask install arq
+brew cask install superduper # free & paid modes
+brew cask install disk-inventory-x
+# brew cask install launchcontrol # for creating new launchctl/launchd entries; free & paid
+# brew cask install the-unarchiver # not sure it's needed anymore
+
+#
+# Screen sharing
+#
+brew cask install teamviewer
+brew cask install screenhero
+
+#
+# Programming
+#
+brew install git
+brew cask install xquartz
+# tag —add brew-installed /Applications/Utilities/XQuartz.app # needs privs :-(
+brew cask install iterm
+brew cask install sourcetree
+
+#
+# Python
+#
+brew install python
+pip3 install numpy matplotlib pandas jupyter
+brew cask install rodeo
+
+#
+# R & friends
+#
+brew cask install r-app # Alternative is “brew install homebrew/science/r”
+tag —add brew-installed /Applications/R.app
+brew cask install rstudio
+
+#
+# Web browsers
+#
+brew cask install brave
+brew cask install epic
+brew cask install google-chrome
+# brew cask install firefox
+brew cask install java
+
+# Security
+#
+#
+brew cask install oversight
+brew install ooniprobe
+brew cask install yubikey-personalization-gui
+
+#
+# General office/business
+#
+brew cask install evernote
+brew cask install libreoffice
+brew cask install lyx
+brew cask install inkscape
+
+#
+# Multimedia
+#
+brew cask install handbrake
+
+#
+# Licensed software
+#
+brew cask install 1password
+brew cask install interarchy
+
+
+======================================================
+On laptop - move location of Caskroom!
+
+Reinstall mactex (or is it TexShop) w/brew
+
+More apps to reinstall:
+default-folder-x, garmin-express, microsoft-office-2011, cord, dropbox,
+diffmerge, mysqlworkbench, banktivity, sqlite (keg only), adobe-air, balsamiq-mockups
+
+3rd batch of casks:
+taskexplorer, lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
+
+# Problems w/casks:
+# vuescan, sandbox, sketchup
+
+version check: vmware-fusion
+
+brew cask search cask-name
+brew cask list
+brew cask info
+brew install Caskroom/cask/cask-name
+brew update; brew cu --dry-run; # update casks
