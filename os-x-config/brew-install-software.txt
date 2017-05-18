@@ -17,9 +17,10 @@ brew tap homebrew/completions # Optional
 brew tap buo/cask-upgrade # https://github.com/buo/homebrew-cask-upgrade
 
 #
-# shell/command-line
+# Shell/command-line
 #
 brew install bash bash-completion
+brew install wget
 set +o nounset # bash completion bug, figure out how to write shell scripts!
 # Add the following lines to your ~/.bash_profile:
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -31,25 +32,29 @@ brew install tag # Optional, but I have a file tag, “brew-installed”, so I c
 # Sysadmin
 #
 brew cask install arq
-brew cask install superduper # free & paid modes
 brew cask install disk-inventory-x
 # brew cask install launchcontrol # for creating new launchctl/launchd entries; free & paid
+brew cask install superduper # free & paid modes
+brew cask install taskexplorer
+brew cask install yujitach-menumeters
 # brew cask install the-unarchiver # not sure it's needed anymore
+
 
 #
 # Screen sharing
 #
-brew cask install teamviewer
 brew cask install screenhero
+brew cask install teamviewer
 
 #
 # Programming
 #
-brew install git
-brew cask install xquartz
-# tag —add brew-installed /Applications/Utilities/XQuartz.app # needs privs :-(
 brew cask install iterm
 brew cask install sourcetree
+brew cask install xquartz
+brew install git
+# tag —add brew-installed /Applications/Utilities/XQuartz.app # needs privs :-(
+
 
 #
 # Python
@@ -70,34 +75,43 @@ brew cask install rstudio
 #
 brew cask install brave
 brew cask install epic
-brew cask install google-chrome
 # brew cask install firefox
-brew cask install java
+brew cask install google-chrome
+# brew cask install java
 
+#
 # Security
 #
-#
+## brew cask install blockblock
+brew cask install lockdown
 brew cask install oversight
 brew install ooniprobe
-brew cask install yubikey-personalization-gui
 
 #
 # General office/business
 #
 brew cask install evernote
+brew cask install inkscape
 brew cask install libreoffice
 brew cask install lyx
-brew cask install inkscape
+brew cask install slack
 
 #
 # Multimedia
 #
 brew cask install handbrake
+brew cask install sketchup
+
+#
+# 3D Printing & CNC
+#
+brew cask install lulzbot-cura
 
 #
 # Licensed software
 #
 brew cask install 1password
+brew cask install default-folder-x
 brew cask install interarchy
 
 
@@ -107,19 +121,25 @@ On laptop - move location of Caskroom!
 Reinstall mactex (or is it TexShop) w/brew
 
 More apps to reinstall:
-default-folder-x, garmin-express, microsoft-office-2011, cord, dropbox,
+garmin-express, microsoft-office-2011, cord, dropbox, bbedit,
 diffmerge, mysqlworkbench, banktivity, sqlite (keg only), adobe-air, balsamiq-mockups
 
 3rd batch of casks:
-taskexplorer, lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
+lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
 
 # Problems w/casks:
 # vuescan, sandbox, sketchup
 
 version check: vmware-fusion
 
+check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
+
 brew cask search cask-name
 brew cask list
 brew cask info
 brew install Caskroom/cask/cask-name
 brew update; brew cu --dry-run; # update casks
+
+# Helpful info:
+# From https://apple.stackexchange.com/questions/127561/script-to-check-software-version
+# defaults read /Applications/TextEdit.app/Contents/Info.plist CFBundleShortVersionString
