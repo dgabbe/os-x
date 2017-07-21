@@ -15,7 +15,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # Enable AirDrop feature for ethernet connected Macs
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-# Show Recovery partition
+# Show Recovery partition & EFI Boot partition
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 
 # Always show scroll bars
