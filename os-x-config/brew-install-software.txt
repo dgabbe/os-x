@@ -75,7 +75,7 @@ brew cask install rstudio
 #
 brew cask install brave
 brew cask install epic
-# brew cask install firefox
+brew cask install firefox
 brew cask install google-chrome
 # brew cask install java
 
@@ -128,17 +128,18 @@ diffmerge, mysqlworkbench, banktivity, sqlite (keg only), adobe-air, balsamiq-mo
 lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
 
 # Problems w/casks:
-# vuescan, sandbox, sketchup
+# sandbox, sketchup
 
 version check: vmware-fusion
 
 check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
 
+brew upgrade
+brew cu -a # update all casks, including auto-update apps.
 brew cask search cask-name
 brew cask list
 brew cask info
 brew install Caskroom/cask/cask-name
-brew update; brew cu --dry-run; # update casks
 
 # Helpful info:
 # From https://apple.stackexchange.com/questions/127561/script-to-check-software-version
