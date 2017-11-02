@@ -53,6 +53,7 @@ brew cask install iterm
 brew cask install sourcetree
 brew cask install xquartz
 brew install git
+brew install sqlite
 # tag —add brew-installed /Applications/Utilities/XQuartz.app # needs privs :-(
 
 
@@ -114,6 +115,11 @@ brew cask install 1password
 brew cask install default-folder-x
 brew cask install interarchy
 
+#
+# Fitness
+#
+brew cask install garmin-express
+
 
 ======================================================
 On laptop - move location of Caskroom!
@@ -121,14 +127,14 @@ On laptop - move location of Caskroom!
 Reinstall mactex (or is it TexShop) w/brew
 
 More apps to reinstall:
-garmin-express, microsoft-office-2011, cord, dropbox, bbedit,
-diffmerge, mysqlworkbench, banktivity, sqlite (keg only), adobe-air, balsamiq-mockups
+microsoft-office-2011, cord, dropbox, bbedit,
+diffmerge, mysqlworkbench, banktivity, adobe-air, balsamiq-mockups
 
 3rd batch of casks:
 lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
 
 # Problems w/casks:
-# sandbox, sketchup
+# sandbox, sketchup, vuescan
 
 version check: vmware-fusion
 
