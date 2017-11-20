@@ -498,7 +498,7 @@
 					<key>batchItems</key>
 					<integer>1</integer>
 					<key>documentPath</key>
-					<string>/Volumes/Mini-HD2/Users2/dgabbe/_git/os-x/automators/PDFpen/OCR file.app</string>
+					<string>~/_git/os-x/automators/PDFpen/OCR file.app</string>
 					<key>itemsBatchSize</key>
 					<integer>1</integer>
 					<key>numberOfWorkflows</key>
@@ -522,6 +522,8 @@
 				</array>
 				<key>Class Name</key>
 				<string>ExecuteWorkflow</string>
+				<key>Disabled</key>
+				<true/>
 				<key>InputUUID</key>
 				<string>7055C783-EAA7-4F80-83B2-0B71648B3314</string>
 				<key>Keywords</key>
@@ -616,14 +618,14 @@
 					</dict>
 				</dict>
 				<key>isViewVisible</key>
-				<true/>
+				<false/>
 				<key>location</key>
-				<string>309.000000:559.000000</string>
+				<string>309.000000:414.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Workflow.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>action</key>
@@ -685,7 +687,7 @@
 					<key>batchItems</key>
 					<integer>1</integer>
 					<key>documentPath</key>
-					<string>/Volumes/Mini-HD2/Users2/dgabbe/_git/os-x/automators/PDFpen/OCR file with override.app</string>
+					<string>~/_git/os-x/automators/PDFpen/OCR file with override.app</string>
 					<key>itemsBatchSize</key>
 					<integer>1</integer>
 					<key>numberOfWorkflows</key>
@@ -710,7 +712,7 @@
 				<key>Class Name</key>
 				<string>ExecuteWorkflow</string>
 				<key>Disabled</key>
-				<true/>
+				<false/>
 				<key>InputUUID</key>
 				<string>3A6CF851-336F-450F-925F-041951BCE0A1</string>
 				<key>Keywords</key>
@@ -805,45 +807,45 @@
 					</dict>
 				</dict>
 				<key>isViewVisible</key>
-				<false/>
+				<true/>
 				<key>location</key>
 				<string>309.000000:601.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Workflow.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
-			<false/>
+			<true/>
 		</dict>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>66CEF5AE-5388-44BE-B4FF-B5B0A8B82C3E</key>
-		<dict>
-			<key>from</key>
-			<string>4AFA3016-356D-44C0-8C64-7D6F635FE60D - 4AFA3016-356D-44C0-8C64-7D6F635FE60D</string>
-			<key>to</key>
-			<string>179B5229-1342-47E3-9DC8-7151FC4B2F3E - 179B5229-1342-47E3-9DC8-7151FC4B2F3E</string>
-		</dict>
-		<key>C29E246C-968B-45D8-9FFF-C71DBD9904D4</key>
-		<dict>
-			<key>from</key>
-			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
-			<key>to</key>
-			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
-		</dict>
-		<key>D001E985-E593-4551-94A4-8E2F0672C430</key>
+		<key>84506805-ABCE-4B0B-86B0-0A343B0A35B6</key>
 		<dict>
 			<key>from</key>
 			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
 			<key>to</key>
 			<string>4AFA3016-356D-44C0-8C64-7D6F635FE60D - 4AFA3016-356D-44C0-8C64-7D6F635FE60D</string>
 		</dict>
-		<key>E07FB6A5-EDAB-4D50-9FD1-78BA3EB3F098</key>
+		<key>C2FAC7F6-F769-4066-80C2-A10029F7BEE7</key>
 		<dict>
 			<key>from</key>
 			<string>370B20BC-7CEF-4D13-9B76-C8F584CD0CBF - 370B20BC-7CEF-4D13-9B76-C8F584CD0CBF</string>
 			<key>to</key>
 			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
+		</dict>
+		<key>D793717F-357F-4D56-B240-0B7FEA22160A</key>
+		<dict>
+			<key>from</key>
+			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
+			<key>to</key>
+			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
+		</dict>
+		<key>E7A93EE7-875B-4E09-8D46-4EEA4C5434CD</key>
+		<dict>
+			<key>from</key>
+			<string>4AFA3016-356D-44C0-8C64-7D6F635FE60D - 4AFA3016-356D-44C0-8C64-7D6F635FE60D</string>
+			<key>to</key>
+			<string>179B5229-1342-47E3-9DC8-7151FC4B2F3E - 179B5229-1342-47E3-9DC8-7151FC4B2F3E</string>
 		</dict>
 	</dict>
 	<key>variables</key>

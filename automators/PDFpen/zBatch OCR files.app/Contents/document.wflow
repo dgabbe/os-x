@@ -63,12 +63,14 @@
 				<string>/System/Library/Automator/Run Workflow.action</string>
 				<key>ActionName</key>
 				<string>Run Workflow</string>
+				<key>ActionNameComment</key>
+				<string>OCR file</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>batchItems</key>
 					<integer>1</integer>
 					<key>documentPath</key>
-					<string>/Volumes/Mini-HD2/Groups/_downloads/_2017/OCR one file.app</string>
+					<string>~/_git/os-x/automators/PDFpen/OCR file.app</string>
 					<key>itemsBatchSize</key>
 					<integer>1</integer>
 					<key>numberOfWorkflows</key>
