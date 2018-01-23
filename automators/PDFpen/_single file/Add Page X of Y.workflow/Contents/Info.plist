@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Add Page Numbers</string>
+	<string>Add Page X of Y</string>
 </dict>
 </plist>
