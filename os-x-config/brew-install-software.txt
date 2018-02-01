@@ -37,6 +37,7 @@ brew cask install disk-inventory-x
 brew cask install superduper # free & paid modes
 brew cask install taskexplorer
 brew cask install yujitach-menumeters
+brew cask install osxfuse
 # brew cask install the-unarchiver # not sure it's needed anymore
 
 
@@ -101,7 +102,7 @@ brew cask install slack
 # Multimedia
 #
 brew cask install handbrake
-brew cask install sketchup
+# brew cask install sketchup
 
 #
 # 3D Printing & CNC
