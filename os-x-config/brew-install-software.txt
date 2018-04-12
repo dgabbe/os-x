@@ -5,15 +5,13 @@
 #
 
 # check if brew is installed
-# install brew if needed
-
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 #
 # brew related
 #
 brew analytics off # personal choice
 brew tap caskroom/cask # deal w/OS X binaries & /Application
 brew install brew-cask-completion
-brew tap homebrew/completions # Optional
 brew tap buo/cask-upgrade # https://github.com/buo/homebrew-cask-upgrade
 
 #
@@ -23,34 +21,38 @@ brew install bash bash-completion
 brew install wget
 set +o nounset # bash completion bug, figure out how to write shell scripts!
 # Add the following lines to your ~/.bash_profile:
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
-fi
-brew install tag # Optional, but I have a file tag, “brew-installed”, so I can keep track of what brew installed in /Applications
+## if [ -f $(brew --prefix)/etc/bash_completion ]; then
+## . $(brew --prefix)/etc/bash_completion
+## fi
+
+# Optional, but I have a file tag, “brew-installed”, so I can keep track of
+# what brew installed in /Applications
+brew install tag
 
 #
 # Sysadmin
 #
 brew cask install arq
 brew cask install disk-inventory-x
-# brew cask install launchcontrol # for creating new launchctl/launchd entries; free & paid
+# for creating new launchctl/launchd entries; free & paid
+# brew cask install launchcontrol
 brew cask install superduper # free & paid modes
 brew cask install taskexplorer
 brew cask install yujitach-menumeters
-brew cask install osxfuse
-# brew cask install the-unarchiver # not sure it's needed anymore
+brew cask install osxfuse # for NTFS disks
+brew cask install the-unarchiver
+# brew cask search timemachineeditor
 
 
 #
 # Screen sharing
 #
-brew cask install screenhero
 brew cask install teamviewer
 
 #
 # Programming
 #
-brew cask install iterm
+brew cask install iterm2
 brew cask install sourcetree
 brew cask install xquartz
 brew install git
@@ -78,7 +80,7 @@ brew cask install rstudio
 brew cask install brave
 brew cask install epic
 brew cask install firefox
-brew cask install google-chrome
+brew cask install google-chrome # needs password
 # brew cask install java
 
 #
@@ -92,6 +94,7 @@ brew install ooniprobe
 #
 # General office/business
 #
+brew cask install dropbox
 brew cask install evernote
 brew cask install inkscape
 brew cask install libreoffice
@@ -102,19 +105,22 @@ brew cask install slack
 # Multimedia
 #
 brew cask install handbrake
-# brew cask install sketchup
+brew tap caskroom/fonts
 
 #
 # 3D Printing & CNC
 #
 brew cask install lulzbot-cura
+# brew cask install sketchup
 
 #
 # Licensed software
 #
 brew cask install 1password
 brew cask install default-folder-x
-brew cask install interarchy
+brew cask install pdfpen
+brew cask install vmware-fusion
+# brew cask install interarchy
 
 #
 # Fitness
@@ -128,7 +134,7 @@ On laptop - move location of Caskroom!
 Reinstall mactex (or is it TexShop) w/brew
 
 More apps to reinstall:
-microsoft-office-2011, cord, dropbox, bbedit,
+microsoft-office-2011, cord, bbedit,
 diffmerge, mysqlworkbench, banktivity, adobe-air, balsamiq-mockups
 
 3rd batch of casks:
@@ -137,10 +143,13 @@ lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-comp
 # Problems w/casks:
 # sandbox, sketchup, vuescan
 
-version check: vmware-fusion
+# Screen sharing (a la Screenhero):
+# uberconfenence.com (use Chrome browser)
+# use-together (didn't find a cask)
 
 check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
 
+================================================
 brew upgrade
 brew cu -a # update all casks, including auto-update apps.
 brew cask search cask-name
@@ -149,5 +158,6 @@ brew cask info
 brew install Caskroom/cask/cask-name
 
 # Helpful info:
+# From https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/
 # From https://apple.stackexchange.com/questions/127561/script-to-check-software-version
 # defaults read /Applications/TextEdit.app/Contents/Info.plist CFBundleShortVersionString
