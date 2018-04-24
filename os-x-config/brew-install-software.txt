@@ -64,8 +64,9 @@ brew install sqlite
 # Python
 #
 brew install python
-pip3 install numpy matplotlib pandas jupyter
-brew cask install rodeo
+pip3 install numpy matplotlib pandas jupyter virtualenv
+brew cask install rodeo pycharm-ce
+brew install pyenv
 
 #
 # R & friends
@@ -148,6 +149,9 @@ lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-comp
 # use-together (didn't find a cask)
 
 check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
+
+# Move iTunes backups to different location:
+ls -s <new location> ~/Library/Application\ Support/MobileSync/Backup
 
 ================================================
 brew upgrade
