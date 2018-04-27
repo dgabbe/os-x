@@ -332,7 +332,7 @@
 					<key>batchItems</key>
 					<integer>1</integer>
 					<key>documentPath</key>
-					<string>/Volumes/Mini-HD2/Users2/dgabbe/_git/os-x/automators/PDFpen/_single file/Add Page X of Y.workflow</string>
+					<string>/Volumes/Mini-HD2/Users2/dgabbe/_git/_os-x/automators/PDFpen/_single file/Add Page X of Y.workflow</string>
 					<key>itemsBatchSize</key>
 					<integer>1</integer>
 					<key>numberOfWorkflows</key>
@@ -462,14 +462,14 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>4AE6AC8A-3E7A-4ACF-9402-B70105BEB935</key>
+		<key>B5F22528-E3C2-407E-9042-469B846900BE</key>
 		<dict>
 			<key>from</key>
 			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
 			<key>to</key>
 			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
 		</dict>
-		<key>75744DC0-F292-412A-B22A-65232B4C03DD</key>
+		<key>D1DDEDF2-F4BC-4F17-BA75-E90EF78CC6B9</key>
 		<dict>
 			<key>from</key>
 			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>

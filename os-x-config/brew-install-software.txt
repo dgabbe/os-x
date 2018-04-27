@@ -40,6 +40,7 @@ brew cask install superduper # free & paid modes
 brew cask install taskexplorer
 brew cask install yujitach-menumeters
 brew cask install osxfuse # for NTFS disks
+brew install speedtest-cli
 brew cask install the-unarchiver
 # brew cask search timemachineeditor
 
@@ -147,6 +148,9 @@ lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-comp
 # Screen sharing (a la Screenhero):
 # uberconfenence.com (use Chrome browser)
 # use-together (didn't find a cask)
+
+# Test connection speed
+speedtest-cli --no-upload # just download speed
 
 check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
 

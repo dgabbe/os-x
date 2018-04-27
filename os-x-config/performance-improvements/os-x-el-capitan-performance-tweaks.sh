@@ -8,15 +8,6 @@
 #  - https://gist.github.com/mbinna/2357277
 
 
-#
-# Review the features above the ================ before you execute this file
-#
-
-
-# =====================================================================
-
-
-
 # Disable animations when opening and closing windows.
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
