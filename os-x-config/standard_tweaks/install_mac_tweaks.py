@@ -14,15 +14,28 @@ import shlex
 import subprocess
 import sys
 
-def print_list_arg():
-    print("list: " + str(args.list))
-    grp = set()
-    for s in tweaks.tweaks:
-        grp.add(s['group'])
+indent = '    '
 
-    print('The groups are:')
-    for t in sorted(grp):
-        print('    ' + t)
+def print_list_arg(indent = indent):
+    print("--list: " + str(args.list))
+
+    if args.list == 'a' or args.list == 'all' or args.list == 'g' or args.list == 'groups':
+        grp = set()
+        for s in tweaks.tweaks:
+            grp.add(s['group'])
+
+        print('The groups are:')
+        for t in sorted(grp):
+            print(indent + t)
+
+    if args.list == 'a' or args.list == 'all' or args.list == 'd' or args.list == 'descriptions':
+        descriptions = set()
+        for d in tweaks.tweaks:
+            descriptions.add(d['group'] + ' | ' + d['description'])
+
+        print('group | description:')
+        for t in sorted(descriptions):
+            print(indent + t)
 
 
 # get log file stuff from installer.py
@@ -35,7 +48,7 @@ group.add_argument("--mode", choices=['b', 'batch', 'i', 'interactive'],
                    action = 'store', default = 'batch',
                     help='Run interactively to confirm each change.')
 group.add_argument('--list', choices = ['all', 'a', 'groups', 'g', 'desciptions', 'd'],
-                   action = 'store', default = 'all',
+                   action = 'store',
                     help='Print lists of the groups and set commands. Silently ignores --groups.')
 parser.add_argument('--groups', type = str, nargs='+',
                     help='Select a subset of tweaks to execute')
@@ -44,10 +57,6 @@ args = parser.parse_args()
 mode = args.mode
 
 # if (args.groups is not None):
-
-print("groups: " + str(args.groups))
-
-print("mode:  " + mode)
 
 # https://apple.stackexchange.com/questions/179527/check-if-an-os-x-user-is-an-administrator?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 # 'id -Gn uid' to check for privs, wonder if there is something in platform module
@@ -61,7 +70,7 @@ except ImportError as e:
 
 os_version = re.match('[0-9]+\.[0-9]+', platform.mac_ver()[0]).group(0)  # major.minor
 
-if (args.list == 'a'):
+if (args.list is not None):
     print_list_arg()
     sys.exit(0)
 
@@ -86,7 +95,6 @@ for t in tweaks.tweaks:
 
 # How to check for admin or privs on os-x
 # regex to replace i and b for mode - code or argsparse fiddling - probably can do in argparse
-# fix entries w/2 set commands
 # pswd = getpass.getpass()
 # getpass.getuser() for user name - check this code, installer.py & dot-profile, rpr-3-sort-a-diofile.site, home-profile
 # # Sorting dictionaries: https://stackoverflow.com/questions/20944483/pythonct-by-its-values/20948781?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
