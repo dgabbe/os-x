@@ -55,13 +55,13 @@ tweaks = [
      },
     {'group': 'sudo',
      'description': 'Disable Bonjour multicast advertisements.\n  See https://www.trustwave.com/Resources/SpiderLabs-Blog/mDNS---Telling-the-world-about-you-(and-your-device)/',
-     'get': 'sudo defaults read /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements',
+     'get': 'defaults read /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements',
      'set': 'sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES',
      'os_v_min': '10.09', 'os_v_max': None
      },
     {'group': 'sudo',
      'description': 'Disable WiFi hotspot screen',
-     'get': 'sudo defaults read /Library/Preferences/SystemConfiguration/com.apple.captive.control Active',
+     'get': 'defaults read /Library/Preferences/SystemConfiguration/com.apple.captive.control Active',
      'set': 'sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -boolean false',
      'os_v_min': '10.09', 'os_v_max': None
      },

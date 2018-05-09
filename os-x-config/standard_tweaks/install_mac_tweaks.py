@@ -35,7 +35,7 @@ def is_executable(tweak_group, groups, is_admin = is_admin()):
     :param is_admin: True if user belongs to 'admn' group.
     :rtype: boolean
     """
-    return True # for testing
+    # return True # for testing
     if groups is None and tweak_group != 'sudo':
         return True
     if groups is None and tweak_group == 'sudo' and is_admin:
@@ -69,7 +69,7 @@ def run_batch_mode(tweaks, args):
 
 def run_command(cmd):
     try:
-        subprocess.run(cmd, shell=True, timeout=60, check=True)
+        subprocess.run(shlex.split(cmd), shell=False, timeout=60, check=True)
         dglogger.log_info(str(cmd))
     except subprocess.CalledProcessError as e:
 #        dglogger.log_error(e, file=sys.stderr)
@@ -164,5 +164,4 @@ else:
 # # Sorting dictionaries: https://stackoverflow.com/questions/20944483/pythonct-by-its-values/20948781?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 # Sorting dictionaries: https://www.pythoncentral.io/how-to-sort-python-dictionaries-by-key-or-value/
 # Asking for a password: https://askubuntu.com/questions/155791/how-do-i-sudo-a-command-in-a-script-without-being-asked-for-a-password
-# Add shlex parsing for safe passing of parameters
 # --list output to less or more for pagination
