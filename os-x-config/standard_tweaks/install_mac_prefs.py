@@ -18,7 +18,6 @@ import shlex
 import subprocess
 import sys
 
-# print('log name: ' + str(logging.getLogger(__name__)))  # returned '__main__'
 
 def is_admin():
     """Check to see if the user belongs to the 'admin' group.
@@ -34,7 +33,7 @@ def is_executable(tweak_group, groups, is_admin = is_admin()):
     :param tweak_group: tweak's group key value.
     :param groups: groups specified on the command line.
     :param is_admin: True if user belongs to 'admn' group.
-    :rtype: boolean
+    :return boolean
     """
     # return True # for testing
     if groups is None and tweak_group != 'sudo':
@@ -73,7 +72,6 @@ def run_command(cmd):
         subprocess.run(shlex.split(cmd), shell=False, timeout=60, check=True)
         dglogger.log_info(str(cmd))
     except subprocess.CalledProcessError as e:
-#        dglogger.log_error(e)
         dglogger.log_error(str(e)) # figure out deal w/file=sys.stderr!
     except subprocess.TimeoutExpired as e:
         dglogger.log_error(e)
