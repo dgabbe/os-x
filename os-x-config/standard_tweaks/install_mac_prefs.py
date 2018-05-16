@@ -11,6 +11,7 @@ import argparse
 import os
 import getpass
 import grp
+import mprefs
 import platform
 import re
 import pexpect
@@ -72,7 +73,7 @@ def run_command(cmd):
         subprocess.run(shlex.split(cmd), shell=False, timeout=60, check=True)
         dglogger.log_info(str(cmd))
     except subprocess.CalledProcessError as e:
-        dglogger.log_error(str(e)) # figure out deal w/file=sys.stderr!
+        dglogger.log_error(str(e))
     except subprocess.TimeoutExpired as e:
         dglogger.log_error(e)
     except OSError as e:
@@ -115,6 +116,8 @@ def run_list_mode(indent = '    '):
 
 
 def main():
+
+    p = mprefs.pref()
     log_file = dglogger.log_config()
 
     dglogger.log_start()

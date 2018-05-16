@@ -74,7 +74,7 @@ def run_command(cmd):
         dglogger.log_info(str(cmd))
     except subprocess.CalledProcessError as e:
 #        dglogger.log_error(e)
-        dglogger.log_error(str(e)) # figure out deal w/file=sys.stderr!
+        dglogger.log_error(str(e))
     except subprocess.TimeoutExpired as e:
         dglogger.log_error(e)
     except OSError as e:
