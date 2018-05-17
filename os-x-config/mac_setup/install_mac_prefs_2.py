@@ -6,18 +6,81 @@ settings.
 While this is an Apple specific script, it doesn't check to see if it's executing on a Mac.
 """
 
-import dglogger
 import argparse
-import os
+import dglogger
 import getpass
 import grp
-import mprefs
+import os
+import pexpect
 import platform
 import re
-import pexpect
 import shlex
 import subprocess
 import sys
+
+
+class pref:
+    """
+    Base class definition for all preferences and tweaks.
+    """
+
+    def __init__(self):
+        self.group = 'general'
+        self.type = 'user'
+        self.method = 'command'
+        self.description = None
+        self.source = None
+        self.os_min = None
+        self.os_max = None
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'{self.group!r}, {self.description!r})')
+
+    def set_pref(self, cmd):
+        # try
+        # logging
+        # if command or shell or sudo
+        subprocess.run(shlex(cmd))
+
+
+class defaults_pref(pref):
+    """For preferences set with 'defaults' command"""
+
+    def __init__(self, description, source):
+        """Create a new instance of a defaults preference.
+        Must provide a domain key and value.
+        """
+        super().__init__()
+        self.description = description
+        self.source = source
+        self.command = 'defaults'
+        self.set = 'write'
+        self.get = 'read'
+        # parse source for domain key & value!!
+        self.domain_key = None
+        self.preferred_value = None
+
+    def set_pref(self):
+        """fill in later"""
+
+        c = self.command + self.set + self.domain_key + self.preferred_value
+        pref.set_pref(self, c)
+
+
+class shell_pref(pref):
+    """For shell commands (sh or bash)"""
+
+    def __init__(self, description, source):
+        """Create a shell command"""
+        super().__init__()
+        self.method = 'shell'
+        self.description = description
+        self.source = source
+        self.command = " ".join(shlex(self.source))
+
+    def set_pref(self, cmd):
+        pass  # for now - figure out
 
 
 def is_admin():
@@ -83,6 +146,7 @@ def run_command(cmd):
     except TypeError as e:
         dglogger.log_error(e)
 
+
 def run_interactive_mode():
     print("Interactive not implemented")
 
@@ -116,8 +180,6 @@ def run_list_mode(indent = '    '):
 
 
 def main():
-
-    p = mprefs.pref()
     log_file = dglogger.log_config()
 
     dglogger.log_start()
@@ -138,7 +200,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        import tweaks
+        import prefs
     except ImportError as e:
         dglogger.log_error(e)
         dglogger.log_end(log_file)
