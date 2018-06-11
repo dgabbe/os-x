@@ -12,7 +12,7 @@
 import shlex
 import subprocess
 
-class pref:
+class cmd:
     """
     Base class definition for all preferences and tweaks.
     """
@@ -27,17 +27,18 @@ class pref:
         self.os_max = None
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
+        return (f'{self.type}, {self.group}, {self.method}' # figure out syntax and add text 
+                f'{self.__class__.__name__}('
                 f'{self.group!r}, {self.description!r})')
 
-    def set_pref(self, cmd):
+    def os_set_cmd(self, cmd):
         # try
         # logging
         # if command or shell or sudo
         subprocess.run(shlex(cmd))
 
 
-class defaults_pref(pref):
+class defaults_cmd(cmd):
     """For preferences set with 'defaults' command"""
 
     def __init__(self, description, source):
@@ -54,14 +55,14 @@ class defaults_pref(pref):
         self.domain_key = None
         self.preferred_value = None
 
-    def set_pref(self):
-        """fill in later"""
+    def os_set_cmd(self):
+        """The actual defaults command string to execute"""
 
         c = self.command + self.set + self.domain_key + self.preferred_value
-        pref.set_pref(self, c)
+        super().os_set_cmd(self, c)
 
 
-class shell_pref(pref):
+class shell_cmd(cmd):
     """For shell commands (sh or bash)"""
 
     def __init__(self, description, source):
@@ -72,5 +73,5 @@ class shell_pref(pref):
         self.source = source
         self.command = " ".join(shlex(self.source))
 
-    def set_pref(self, cmd):
-        pass  # for now - figure out
+    def os_set_cmd(self):
+        print('Under development: ', self.command)

@@ -19,70 +19,6 @@ import subprocess
 import sys
 
 
-class pref:
-    """
-    Base class definition for all preferences and tweaks.
-    """
-
-    def __init__(self):
-        self.group = 'general'
-        self.type = 'user'
-        self.method = 'command'
-        self.description = None
-        self.source = None
-        self.os_min = None
-        self.os_max = None
-
-    def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'{self.group!r}, {self.description!r})')
-
-    def set_pref(self, cmd):
-        # try
-        # logging
-        # if command or shell or sudo
-        subprocess.run(shlex(cmd))
-
-
-class defaults_pref(pref):
-    """For preferences set with 'defaults' command"""
-
-    def __init__(self, description, source):
-        """Create a new instance of a defaults preference.
-        Must provide a domain key and value.
-        """
-        super().__init__()
-        self.description = description
-        self.source = source
-        self.command = 'defaults'
-        self.set = 'write'
-        self.get = 'read'
-        # parse source for domain key & value!!
-        self.domain_key = None
-        self.preferred_value = None
-
-    def set_pref(self):
-        """fill in later"""
-
-        c = self.command + self.set + self.domain_key + self.preferred_value
-        pref.set_pref(self, c)
-
-
-class shell_pref(pref):
-    """For shell commands (sh or bash)"""
-
-    def __init__(self, description, source):
-        """Create a shell command"""
-        super().__init__()
-        self.method = 'shell'
-        self.description = description
-        self.source = source
-        self.command = " ".join(shlex(self.source))
-
-    def set_pref(self, cmd):
-        pass  # for now - figure out
-
-
 def is_admin():
     """Check to see if the user belongs to the 'admin' group.
 
@@ -124,7 +60,7 @@ def os_supported(min_v, max_v):
 
 
 def run_batch_mode(tweaks, args):
-    for t in tweaks:
+    for t in settings:
         if os_supported(t['os_v_min'], t['os_v_max']) \
                 and is_executable(t['group'], args.groups, is_admin()) \
                 and t['group'] != 'test':
@@ -162,7 +98,7 @@ def run_list_mode(indent = '    '):
 
     if args.list == 'a' or args.list == 'all' or args.list == 'g' or args.list == 'groups':
         grp = set()
-        for s in tweaks.tweaks:
+        for s in settings.settings:
             grp.add(s['group'])
 
         print('The groups are:')
@@ -185,7 +121,7 @@ def main():
     dglogger.log_start()
 
     parser = argparse.ArgumentParser(
-        description="""install_mac_tweaks changes user and global settings to improve performance, security, 
+        description="""install_mac_tweaks changes user and global settings to improve performance, security,
     and convenience. Results logged to a file."""
     )
     group = parser.add_mutually_exclusive_group()
@@ -200,7 +136,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        import prefs
+        import settings
     except ImportError as e:
         dglogger.log_error(e)
         dglogger.log_end(log_file)
