@@ -7,6 +7,7 @@ While this is an Apple specific script, it doesn't check to see if it's executin
 """
 
 import argparse
+import commands
 import dglogger
 import getpass
 import grp
@@ -59,12 +60,9 @@ def os_supported(min_v, max_v):
     return not (os_version < str(min_v) or (max_v is not None and os_version > str(max_v)))
 
 
-def run_batch_mode(tweaks, args):
-    for t in settings:
-        if os_supported(t['os_v_min'], t['os_v_max']) \
-                and is_executable(t['group'], args.groups, is_admin()) \
-                and t['group'] != 'test':
-            run_command(t['set'])
+def run_batch_mode(settings, args):
+    for s in settings:
+        run_command(s.os_set_cmd())
 
 
 def run_command(cmd):
@@ -146,7 +144,7 @@ def main():
         run_list_mode()
         sys.exit(0)
     elif args.mode == 'batch' or args.mode == 'b':
-        run_batch_mode(tweaks.tweaks, args)
+        run_batch_mode(settings.settings, args)
     elif args.mode == 'interactive' or args.mode == 'i':
         run_interactive_mode()
 
