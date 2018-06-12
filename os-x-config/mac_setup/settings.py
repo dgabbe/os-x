@@ -3,16 +3,17 @@
 # Definition of OS X/MacOS tweaks
 # group, description, set, get, os_v_min, os_ver_max
 
+import commands
 
 settings = [
-    defaults_cmd('Test exception handling', "set-foobar"),
+    commands.defaults_cmd('Test exception handling', "set-foobar"),
  # {'group': 'test',
  #     'description': ,
  #     'get': "foobar",
  #     'set': ,
  #     'os_v_min': '10.09', 'os_v_max': None
  #     },
-    defaults_cmd('Disable animations when opening and closing windows.',
+    commands.defaults_cmd('Disable animations when opening and closing windows.',
                   "defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false"),
  # {'group': 'animation',
  #     'description': 'Disable animations when opening and closing windows.',

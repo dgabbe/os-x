@@ -51,8 +51,9 @@ class defaults_cmd(cmd):
         self.command = 'defaults'
         self.set = 'write'
         self.get = 'read'
-        # parse source for domain key & value!!
-        self.domain_key = None
+        ss = source.split()
+        self.domain_key = ss[2] + " " + ss[3]
+        # parse preferred value!
         self.preferred_value = None
 
     def os_set_cmd(self):
