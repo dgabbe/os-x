@@ -135,10 +135,19 @@ def main():
 
     try:
         import settings
+        if (len(settings) ==0): raise ValueError('settings has no commands to process.')
     except ImportError as e:
         dglogger.log_error(e)
         dglogger.log_end(log_file)
         sys.exit(1)
+
+    # Build data structure to process
+    settings = []
+    for s in settings.settings:
+        try:
+            settings.append(new_command) # blah blash
+        except:
+            # blah blah
 
     if args.list is not None:
         run_list_mode()

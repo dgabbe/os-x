@@ -6,20 +6,16 @@
 import commands
 
 settings = [
-    commands.defaults_cmd('Test exception handling', "set-foobar"),
- # {'group': 'test',
- #     'description': ,
- #     'get': "foobar",
- #     'set': ,
- #     'os_v_min': '10.09', 'os_v_max': None
- #     },
-    commands.defaults_cmd('Disable animations when opening and closing windows.',
-                  "defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false"),
- # {'group': 'animation',
- #     'description': 'Disable animations when opening and closing windows.',
- #     'set': "defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false",
- #     'os_v_min': '10.09', 'os_v_max': None
- #     },
+     {'group': 'test',
+         'description': 'test case',
+         'get': "foobar",
+         'os_v_min': '10.09', 'os_v_max': None
+         },
+     {'group': 'animation',
+         'description': 'Disable animations when opening and closing windows.',
+         'set': "defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false",
+         'os_v_min': '10.09', 'os_v_max': None
+         },
     {'group': 'animation',
      'description': 'Disable animations when opening a Quick Look window.',
      'set': "defaults write -g QLPanelAnimationDuration -float 0",
@@ -54,6 +50,11 @@ settings = [
     {'group': 'general',
      'description': 'Disable shadow in screenshots',
      'set': 'defaults write com.apple.screencapture disable-shadow -bool true',
+     'os_v_min': '10.09', 'os_v_max': None
+     },
+    {'group': 'general',
+     'description': 'Change the location for saving screenshots',
+     'set': 'defaults write com.apple.screencapture location <new path>/; killall SystemUIServer',
      'os_v_min': '10.09', 'os_v_max': None
      },
     {'group': 'sudo',

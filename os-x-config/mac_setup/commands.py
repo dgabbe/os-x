@@ -9,12 +9,13 @@
 #         'get': 'read',
 #         'os_v_min': None, 'os_v_max': None
 #         }
+import dglogger
 import shlex
 import subprocess
 
 class cmd:
     """
-    Base class definition for all preferences and tweaks.
+    Base class definition for all preferences and settings.
     """
 
     def __init__(self):
@@ -51,10 +52,15 @@ class defaults_cmd(cmd):
         self.command = 'defaults'
         self.set = 'write'
         self.get = 'read'
-        ss = source.split()
-        self.domain_key = ss[2] + " " + ss[3]
-        # parse preferred value!
-        self.preferred_value = None
+        try:
+            ss = source.split()
+            self.domain_key = ss[2] + " " + ss[3]
+            self.preferred_value = ss[4] + " " + ss[5]
+        except IndexError:
+            dglogger.log_warning("Expecting domain key and value for: " + self.source)
+#            raise ValueError
+#            self.__del__()
+
 
     def os_set_cmd(self):
         """The actual defaults command string to execute"""
