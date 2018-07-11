@@ -48,3 +48,6 @@ defaults(
 defaults write NSGlobalDomain PMPrintingExpandedStateforPrint2 -bool true)
 
 ]
+
+# Turn on/off mouse driver (use keyboard for mouse control)
+# Add defaults write com.apple.universalaccess mouseDriver <value>
