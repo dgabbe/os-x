@@ -1,0 +1,24 @@
+defaults command
+
+  * -g synonym for NSGlobalDomain
+  * domain name or -app <app name>
+
+  * deal w/Mac OS version w/try/catch exception
+  * sudo - deal w/later
+
+Simplifying class structure:
+
+  * assume defaults command
+  * class attributes
+    * description: string
+    * tags: list
+    * references: list [thinking of urls]
+    * domain: string
+    * key: string
+    * preferred_value: list
+
+  * class methods
+    * list
+    * get
+    * set
+    * list-tags
