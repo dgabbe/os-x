@@ -3,6 +3,10 @@
 # Definition of OS X/MacOS tweaks
 # group, description, set, get, os_v_min, os_ver_max
 
+# Sources:
+#    - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+#    - https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
+
 import commands
 
 settings = [
@@ -187,5 +191,14 @@ settings = [
      'description': 'Disable the warning when changing a file extension',
      'set': 'defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false',
      'os_v_min': '10.09', 'os_v_max': None
-     }
+     },
+
+    {
+    'set': 'defaults write com.apple.finder AppleShowAllFiles -bool true'
+    },
+
+    {
+    'description': 'Always display file extensions (.jpg, .txt, .pdf, etc)'
+    'set': 'defaults write NSGlobalDomain AppleShowAllExtensions -bool true'
+    }
 ]
