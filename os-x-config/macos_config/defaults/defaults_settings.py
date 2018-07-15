@@ -51,3 +51,6 @@ defaults write NSGlobalDomain PMPrintingExpandedStateforPrint2 -bool true)
 
 # Turn on/off mouse driver (use keyboard for mouse control)
 # Add defaults write com.apple.universalaccess mouseDriver <value>
+
+# Add pmset for energy saver settings (AC & Battery power). Needs sudo
+# pmset -g to display current settings.
