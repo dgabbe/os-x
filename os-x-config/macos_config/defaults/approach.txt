@@ -16,6 +16,7 @@ Simplifying class structure:
     * domain: string
     * key: string
     * preferred_value: list
+    * retired: 10.11 (first version not supported)
 
   * class methods
     * list

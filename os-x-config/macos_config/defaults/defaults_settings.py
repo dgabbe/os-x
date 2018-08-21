@@ -26,26 +26,47 @@ defaults_settings = [
              ["-bool", "true"]),
 
     defaults("Enable AirDrop feature for ethernet connected Macs",
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true),
+             ["network", "utility"],
+             "com.apple.NetworkBrowser",
+             "BrowseAllInterfaces",
+             ["-bool", "true"]),
 
-defaults(
-# Show Recovery partition & EFI Boot partition
-defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true),
+    defaults("Show Recovery partition & EFI Boot partition",
+             ["disk", "utility"],
+             "com.apple.DiskUtility",
+             "DUDebugMenuEnabled",
+             ["-bool", "true"],
+             "10.11"),
 
-defaults(# Always show scroll bars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"),
+    defaults("Always show scroll bars",
+            ["global", "windows"],
+             "NSGlobalDomain",
+             "AppleShowScrollBars",
+             ["-string", "Always"]),
 
-defaults(# Expand Save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true),
+    defaults("Expand Save panel by default",
+             ["misc", "global"],
+            "NSGlobalDomain",
+             "NSNavPanelExpandedStateForSaveMode",
+             ["-bool", "true"]),
 
-defaults(
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true),
+    defaults("Expand Save panel by default",
+             ["misc", "global"],
+            "NSGlobalDomain",
+             "NSNavPanelExpandedStateForSaveMode2",
+             ["-bool", "true"]),
 
-defaults(# Expand Print menu by default
-defaults write NSGlobalDomain PMPrintingExpandedStateforPrint -bool true),
+    defaults("Expand Print menu by default",
+             ["misc", "global"],
+            "NSGlobalDomain",
+             "PMPrintingExpandedStateforPrint",
+             ["-bool", "true"]),
 
-defaults(
-defaults write NSGlobalDomain PMPrintingExpandedStateforPrint2 -bool true)
+    defaults("Expand Print menu by default",
+             ["misc", "global"],
+             "NSGlobalDomain",
+             "PMPrintingExpandedStateforPrint2",
+             ["-bool", "true"])
 
 ]
 
