@@ -8,17 +8,17 @@ While this is an Apple specific script, it doesn't check to see if it's executin
 
 import argparse
 import commands
-import dglogger
 import getpass
 import grp
 import os
-import pexpect
+#import pexpect
 import platform
 import re
 import shlex
 import subprocess
 import sys
-
+# Also read https://airbrake.io/blog/python-exception-handling/importerror-and-modulenotfounderror
+sys.path.insert(0, '/Users/dgabbe/_git/_python/dglogger')
 
 def is_admin():
     """Check to see if the user belongs to the 'admin' group.
@@ -114,12 +114,19 @@ def run_list_mode(indent = '    '):
 
 
 def main():
-    log_file = dglogger.log_config()
+    try:
+        import dglogger
+    except ModuleNotFoundError as e:
+        print('...Logging unavailable. Continuing.')
 
-    dglogger.log_start()
+    try:
+        log_file = dglogger.log_config()
+        dglogger.log_start()
+    except Exception:
+        None
 
     parser = argparse.ArgumentParser(
-        description="""install_mac_tweaks changes user and global settings to improve performance, security,
+        description="""install_mac_settings changes user and global settings to improve performance, security,
     and convenience. Results logged to a file."""
     )
     group = parser.add_mutually_exclusive_group()
@@ -130,15 +137,18 @@ def main():
                    action = 'store',
                    help='Print lists of the groups and set commands. Silently ignores --groups.')
     parser.add_argument('--groups', type = str, nargs='+',
-                    help='Select a subset of tweaks to execute')
+                    help='Select a subset of settings to execute')
     args = parser.parse_args()
 
     try:
         import settings
         if (len(settings) ==0): raise ValueError('settings has no commands to process.')
     except ImportError as e:
-        dglogger.log_error(e)
-        dglogger.log_end(log_file)
+        try:
+            dglogger.log_error(e)
+            dglogger.log_end(log_file)
+        except Exception:
+            None
         sys.exit(1)
 
     # Build data structure to process
@@ -146,8 +156,8 @@ def main():
     for s in settings.settings:
         try:
             settings.append(new_command) # blah blash
-        except:
-            # blah blah
+        except Exception as e:
+            print(e)
 
     if args.list is not None:
         run_list_mode()

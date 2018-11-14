@@ -9,7 +9,7 @@
 #         'get': 'read',
 #         'os_v_min': None, 'os_v_max': None
 #         }
-import dglogger
+#import dglogger
 import shlex
 import subprocess
 
