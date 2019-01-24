@@ -11,24 +11,27 @@ import commands
 import getpass
 import grp
 import os
-#import pexpect
+
+# import pexpect
 import platform
 import re
 import shlex
 import subprocess
 import sys
+
 # Also read https://airbrake.io/blog/python-exception-handling/importerror-and-modulenotfounderror
-sys.path.insert(0, '/Users/dgabbe/_git/_python/dglogger')
+sys.path.insert(0, "/Users/dgabbe/_git/_python/dglogger")
+
 
 def is_admin():
     """Check to see if the user belongs to the 'admin' group.
 
     :return: boolean
     """
-    return os.getlogin() in grp.getgrnam('admin').gr_mem
+    return os.getlogin() in grp.getgrnam("admin").gr_mem
 
 
-def is_executable(tweak_group, groups, is_admin = is_admin()):
+def is_executable(tweak_group, groups, is_admin=is_admin()):
     """Determines if the tweak should be executed.
 
     :param tweak_group: tweak's group key value.
@@ -37,13 +40,18 @@ def is_executable(tweak_group, groups, is_admin = is_admin()):
     :return boolean
     """
     # return True # for testing
-    if groups is None and tweak_group != 'sudo':
+    if groups is None and tweak_group != "sudo":
         return True
-    if groups is None and tweak_group == 'sudo' and is_admin:
+    if groups is None and tweak_group == "sudo" and is_admin:
         return True
-    if groups is not None and tweak_group in groups and tweak_group != 'sudo':
+    if groups is not None and tweak_group in groups and tweak_group != "sudo":
         return True
-    if groups is not None and tweak_group in groups and tweak_group == 'sudo' and is_admin:
+    if (
+        groups is not None
+        and tweak_group in groups
+        and tweak_group == "sudo"
+        and is_admin
+    ):
         return True
     return False
 
@@ -56,8 +64,12 @@ def os_supported(min_v, max_v):
     :param max_v:
     :return: boolean
     """
-    os_version = re.match('[0-9]+\.[0-9]+', platform.mac_ver()[0]).group(0)  # major.minor
-    return not (os_version < str(min_v) or (max_v is not None and os_version > str(max_v)))
+    os_version = re.match("[0-9]+\.[0-9]+", platform.mac_ver()[0]).group(
+        0
+    )  # major.minor
+    return not (
+        os_version < str(min_v) or (max_v is not None and os_version > str(max_v))
+    )
 
 
 def run_batch_mode(settings, args):
@@ -85,7 +97,7 @@ def run_interactive_mode():
     print("Interactive not implemented")
 
 
-def run_list_mode(indent = '    '):
+def run_list_mode(indent="    "):
     """helper function to print summary info from the tweaks list.
 
     :global arg.list: replies on global results from parser.
@@ -94,21 +106,31 @@ def run_list_mode(indent = '    '):
     """
     print("--list: " + str(args.list))
 
-    if args.list == 'a' or args.list == 'all' or args.list == 'g' or args.list == 'groups':
+    if (
+        args.list == "a"
+        or args.list == "all"
+        or args.list == "g"
+        or args.list == "groups"
+    ):
         grp = set()
         for s in settings.settings:
-            grp.add(s['group'])
+            grp.add(s["group"])
 
-        print('The groups are:')
+        print("The groups are:")
         for t in sorted(grp):
             print(indent + t)
 
-    if args.list == 'a' or args.list == 'all' or args.list == 'd' or args.list == 'descriptions':
+    if (
+        args.list == "a"
+        or args.list == "all"
+        or args.list == "d"
+        or args.list == "descriptions"
+    ):
         descriptions = set()
         for d in tweaks.tweaks:
-            descriptions.add(d['group'] + ' | ' + d['description'])
+            descriptions.add(d["group"] + " | " + d["description"])
 
-        print('group | description:')
+        print("group | description:")
         for t in sorted(descriptions):
             print(indent + t)
 
@@ -117,7 +139,7 @@ def main():
     try:
         import dglogger
     except ModuleNotFoundError as e:
-        print('...Logging unavailable. Continuing.')
+        print("...Logging unavailable. Continuing.")
 
     try:
         log_file = dglogger.log_config()
@@ -130,19 +152,29 @@ def main():
     and convenience. Results logged to a file."""
     )
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--mode", choices=['b', 'batch', 'i', 'interactive'],
-                   action = 'store', default = 'batch',
-                   help='Run interactively to confirm each change.')
-    group.add_argument('--list', choices = ['all', 'a', 'groups', 'g', 'descriptions', 'd'],
-                   action = 'store',
-                   help='Print lists of the groups and set commands. Silently ignores --groups.')
-    parser.add_argument('--groups', type = str, nargs='+',
-                    help='Select a subset of settings to execute')
+    group.add_argument(
+        "--mode",
+        choices=["b", "batch", "i", "interactive"],
+        action="store",
+        default="batch",
+        help="Run interactively to confirm each change.",
+    )
+    group.add_argument(
+        "--list",
+        choices=["all", "a", "groups", "g", "descriptions", "d"],
+        action="store",
+        help="Print lists of the groups and set commands. Silently ignores --groups.",
+    )
+    parser.add_argument(
+        "--groups", type=str, nargs="+", help="Select a subset of settings to execute"
+    )
     args = parser.parse_args()
 
     try:
         import settings
-        if (len(settings) ==0): raise ValueError('settings has no commands to process.')
+
+        if len(settings) == 0:
+            raise ValueError("settings has no commands to process.")
     except ImportError as e:
         try:
             dglogger.log_error(e)
@@ -155,22 +187,22 @@ def main():
     settings = []
     for s in settings.settings:
         try:
-            settings.append(new_command) # blah blash
+            settings.append(new_command)  # blah blash
         except Exception as e:
             print(e)
 
     if args.list is not None:
         run_list_mode()
         sys.exit(0)
-    elif args.mode == 'batch' or args.mode == 'b':
+    elif args.mode == "batch" or args.mode == "b":
         run_batch_mode(settings.settings, args)
-    elif args.mode == 'interactive' or args.mode == 'i':
+    elif args.mode == "interactive" or args.mode == "i":
         run_interactive_mode()
 
     dglogger.log_end(log_file)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 else:
     print("WARNING: Was not expecting to be imported. Exiting.")
