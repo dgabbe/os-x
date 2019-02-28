@@ -4,6 +4,8 @@
 # Definition of OS X/MacOS tweaks
 # group, description, set, get, os_v_min, os_ver_max
 
+# add: defaults write -g ApplePressAndHoldEnabled -bool false "Enable repeat action when key hold down"
+
 tweaks = [
     {'group': 'test',
      'description': 'Test exception handling',
