@@ -8,6 +8,7 @@
 #
 
 from argparse import ArgumentParser
+import commands
 from csv import DictReader, register_dialect
 from os.path import dirname, join
 from sys import exit, stderr
@@ -52,7 +53,8 @@ def main():
         print("    Reviewing {} settings...".format(row_count - 1))
         csvfile.seek(0)
         for row in reader:
-            print(row)
+            print("  working: {} | {}".format(row["domain"], row["key"]))
+            c = Defaults_Cmd(**row)
 
 
 if __name__ == "__main__":
