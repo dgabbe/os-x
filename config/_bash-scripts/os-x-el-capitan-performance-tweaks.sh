@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 #
 # Sources:
+#  - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+#  - https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
+#  - https://pawelgrzybek.com/change-macos-user-preferences-via-command-line/
 #  - http://www.defaults-write.com/10-terminal-commands-to-speed-up-your-mac-in-os-x-el-capitan/
 #  - https://gist.github.com/benfrain/7434600
 #  - https://github.com/drduh/

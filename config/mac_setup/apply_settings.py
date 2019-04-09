@@ -3,13 +3,23 @@
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
+#
+#   - http://www.defaults-write.com/10-terminal-commands-to-speed-up-your-mac-in-os-x-el-capitan/
+#   - https://gist.github.com/benfrain/7434600
+#   - https://gist.github.com/mbinna/2357277
+#   - https://github.com/drduh/
 #   - https://github.com/mathiasbynens/dotfiles/
+#   - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 #   - https://github.com/paulirish/dotfiles
+#   - https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
+#   - https://pawelgrzybek.com/change-macos-user-preferences-via-command-line/
 #
 
 from argparse import ArgumentParser
 import commands
 from csv import DictReader, register_dialect
+from grp import getgrnam
+from os import getlogin
 from os.path import dirname, join
 from sys import exit, stderr
 
@@ -19,7 +29,7 @@ def is_admin():
 
     :return: boolean
     """
-    return os.getlogin() in grp.getgrnam("admin").gr_mem
+    return getlogin() in getgrnam("admin").gr_mem
 
 
 def main():
