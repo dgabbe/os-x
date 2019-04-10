@@ -7,8 +7,6 @@ While this is an Apple specific script, it doesn't check to see if it's executin
 """
 
 import argparse
-import commands
-import getpass
 import grp
 import os
 

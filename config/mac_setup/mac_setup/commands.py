@@ -41,7 +41,7 @@ class Cmd:
 class Defaults_Cmd(Cmd):
     """For 'defaults' command settings."""
 
-    def __init__(self, domain, domain_key, value_type, value, description):
+    def __init__(self, domain, key, value_type, value, description):
         """Create a new instance of a defaults preference.
         Must provide a domain, domain key and value.
         """
@@ -51,7 +51,7 @@ class Defaults_Cmd(Cmd):
         self.set = "write"
         self.get = "read"
         self.domain = domain
-        self.domain_key = domain_key
+        self.key = key
         self.validate_value(value_type, value)
 
     def __repr__(self):
@@ -64,10 +64,10 @@ class Defaults_Cmd(Cmd):
         raise NotImplementedError("__eq__ is not implemented yet")
         pass
 
-    def normalize_bool_value(bool_value):
-        if bool_value in ("0", "NO", "FALSE"):
+    def normalize_bool_value(self, bool_value):
+        if bool_value.upper() in ("0", "NO", "FALSE"):
             "0"
-        elif bool_value in ("1", "TRUE", "YES"):
+        elif bool_value.upper() in ("1", "TRUE", "YES"):
             "1"
         else:
             raise ValueError("{} is an invalid -boolean value".format(bool_value))
@@ -93,7 +93,7 @@ class Defaults_Cmd(Cmd):
     def get_cmd(self):
         """The actual defaults command string to execute"""
 
-        c = self.command + self.get + self.domain + self.domain_key
+        c = self.command + self.get + self.domain + self.key
         print(c)
 
     def set_cmd(self):
@@ -103,7 +103,7 @@ class Defaults_Cmd(Cmd):
             self.command
             + self.set
             + self.domain
-            + self.domain_key
+            + self.key
             + self.value_type
             + self.value
         )

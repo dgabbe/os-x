@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+# $ python3 -m mac_setup.apply_settings
+
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
@@ -16,12 +18,13 @@
 #
 
 from argparse import ArgumentParser
-import commands
 from csv import DictReader, register_dialect
 from grp import getgrnam
 from os import getlogin
 from os.path import dirname, join
-from sys import exit, stderr
+from sys import stderr
+
+from mac_setup.commands import Defaults_Cmd
 
 
 def is_admin():
@@ -45,6 +48,8 @@ def main():
         default="defaults",
         help="Which group of settings to apply.",
     )
+
+    # Change -dryrun & -quiet to be mutually exclusive
     parser.add_argument(
         "-dryrun",
         action="store_true",
@@ -63,8 +68,13 @@ def main():
         print("    Reviewing {} settings...".format(row_count - 1))
         csvfile.seek(0)
         for row in reader:
+            # add -quiet support here
             print("  working: {} | {}".format(row["domain"], row["key"]))
-            c = Defaults_Cmd(**row)
+            try:
+                c = Defaults_Cmd(**row)
+            except:
+                pass
+                # handle TypeError & ValueError
 
 
 if __name__ == "__main__":
