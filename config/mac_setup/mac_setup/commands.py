@@ -23,12 +23,11 @@ class Cmd:
     def set_cmd(self):
         raise NotImplementedError("  Oops: method set_cmd needs to be implemented")
 
-
     def get_cmd(self):
         raise NotImplementedError("  Oops: method get_cmd needs to be implemented")
 
-# Need better name since an OS call is made for get as well as set
-# change_value, execute_change, ...
+    # Need better name since an OS call is made for get as well as set
+    # change_value, execute_change, ...
     def execute_cmd(self, cmd):
         print("  ** ToDo: implement execute_cmd()! **")
         # if !not dry_run
@@ -93,20 +92,13 @@ class Defaults_Cmd(Cmd):
     def get_cmd(self):
         """The actual defaults command string to execute"""
 
-        c = self.command + self.get + self.domain + self.key
+        c = f"{self.command} {self.get} {self.domain} {self.key}"
         print(c)
 
     def set_cmd(self):
         """The actual defaults command string to execute"""
 
-        c = (
-            self.command
-            + self.set
-            + self.domain
-            + self.key
-            + self.value_type
-            + self.value
-        )
+        c = f"{self.command} {self.get} {self.domain} {self.key} {self.value_type} {self.value}"
         print(c)
 
     def get(self):

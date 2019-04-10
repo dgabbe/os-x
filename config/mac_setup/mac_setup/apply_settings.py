@@ -35,6 +35,15 @@ def is_admin():
     return getlogin() in getgrnam("admin").gr_mem
 
 
+def printerr(*args, **kwargs):
+    print(">" * 2, *args, **kwargs, file=stderr)
+
+
+def printq(quiet_arg, *args, **kwargs):
+    if not quiet_arg:
+        print(*args, **kwargs)
+
+
 def main():
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
@@ -49,35 +58,52 @@ def main():
         help="Which group of settings to apply.",
     )
 
-    # Change -dryrun & -quiet to be mutually exclusive
-    parser.add_argument(
+    verbose_or_silent = parser.add_mutually_exclusive_group()
+    verbose_or_silent.add_argument(
         "-dryrun",
         action="store_true",
         default=False,
         help="Simulate and report the changes, but do not make them.",
     )
-    parser.add_argument(
+    verbose_or_silent.add_argument(
         "-quiet", action="store_true", default=False, help="""Operate in quiet mode."""
     )
     args = parser.parse_args()
 
+    csv = "defaults.csv"
     register_dialect("comma-space", delimiter=",", skipinitialspace=True)
-    with open(join(dirname(__file__), "settings/defaults.csv"), newline="") as csvfile:
+    with open(
+        join(dirname(__file__), "settings/{}".format(csv)), newline=""
+    ) as csvfile:
         reader = DictReader(csvfile, dialect="comma-space")
         row_count = sum(1 for row in csvfile)
-        print("    Reviewing {} settings...".format(row_count - 1))
+        print(" " * 2, "{}: Reviewing {} settings...".format(csv, row_count - 1))
         csvfile.seek(0)
+        line = 1  # account for header
         for row in reader:
-            # add -quiet support here
-            print("  working: {} | {}".format(row["domain"], row["key"]))
+            line += 1
+            cursor = row["domain"] + " | " + row["key"]
+            printq(args.quiet, " " * 4, "working: {}".format(cursor))
             try:
                 c = Defaults_Cmd(**row)
-            except:
-                pass
-                # handle TypeError & ValueError
+                c.get_cmd()
+            except TypeError:
+                printerr(
+                    "Line {}: Domain/key: {}: Check for missing ','s".format(
+                        line, cursor
+                    ),
+                    sep="",
+                )
+            except ValueError:
+                printerr(
+                    "Line {}: Domain/key: {}: Check for missing ','s".format(
+                        line, cursor
+                    ),
+                    sep = "",
+                )
 
 
 if __name__ == "__main__":
     main()
 else:
-    print("    ** Did not plan on being imported **", file=stderr)
+    printerr("** Did not plan on being imported **")
