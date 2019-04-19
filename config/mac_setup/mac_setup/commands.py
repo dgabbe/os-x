@@ -8,25 +8,29 @@ class Cmd:
     """
 
     def __init__(self):
-        self.description = None
-        self.command = None
-        self.set = None
-        self.get = None
+        self._description = None
+        self._command = None
+        self._set = None
+        self._get = None
 
-    def __repr__(self):
-        return (
-            f"{self.method}"  # figure out syntax and add text
-            f"{self.__class__.__name__}("
-            f"{self.description!r})"
+    # def __repr__(self):
+    #     return (
+    #         f"{self.method}"  # figure out syntax and add text
+    #         f"{self.__class__.__name__}("
+    #         f"{self._description!r})"
+    #     )
+
+    def build_set_cmd(self):
+        raise NotImplementedError(
+            "  Oops: method build_set_cmd needs to be implemented"
         )
 
-    def set_cmd(self):
-        raise NotImplementedError("  Oops: method set_cmd needs to be implemented")
+    def build_get_cmd(self):
+        raise NotImplementedError(
+            "  Oops: method build_get_cmd needs to be implemented"
+        )
 
-    def get_cmd(self):
-        raise NotImplementedError("  Oops: method get_cmd needs to be implemented")
-
-    # Need better name since an OS call is made for get as well as set
+    # Need better name since an OS call is made for get as well as set_value
     # change_value, execute_change, ...
     def execute_cmd(self, cmd):
         print("  ** ToDo: implement execute_cmd()! **")
@@ -45,19 +49,19 @@ class Defaults_Cmd(Cmd):
         Must provide a domain, domain key and value.
         """
         super().__init__()
-        self.description = description
-        self.command = "defaults"
-        self.set = "write"
-        self.get = "read"
-        self.domain = domain
-        self.key = key
-        self.validate_value(value_type, value)
+        self._description = description
+        self._command = "defaults"
+        self._set = "write"
+        self._get = "read"
+        self._domain = domain
+        self._key = key
+        self.set_value(value_type, value)
 
-    def __repr__(self):
-        raise NotImplementedError("__repr__ is not implemented yet")
+    # def __repr__(self):
+    #     raise NotImplementedError("__repr__ is not implemented yet")
 
     def __str__(self):
-        raise NotImplementedError("__str__ is not implemented yet")
+        return f"{self.command} {self._get} {self._domain} {self._key}"
 
     def __eq__(self, other):
         raise NotImplementedError("__eq__ is not implemented yet")
@@ -65,23 +69,25 @@ class Defaults_Cmd(Cmd):
 
     def normalize_bool_value(self, bool_value):
         if bool_value.upper() in ("0", "NO", "FALSE"):
-            "0"
+            return "0"
         elif bool_value.upper() in ("1", "TRUE", "YES"):
-            "1"
+            return "1"
         else:
             raise ValueError("{} is an invalid -boolean value".format(bool_value))
 
-    def validate_value(self, value_type, value):
+    def set_value(self, value_type, value):
         # defaults man page lists types as:
         #   -string, -data, -int[eger], -float, -bool[ean], -date, -array-add, -dict, -dict-add
         # Normalize boolean values to "0" or "1" to match values returned by 'defaults read'.
         if value_type in ("-string", "-data", "-float", "-date"):
-            self.value_type = value_type
+            self._value_type = value_type
+            self._value = value
         elif value_type in ("-int", "-integer"):
-            self.value_type = "-int"
+            self._value_type = "-int"
+            self._value = value
         elif value_type in ("-bool", "-boolean"):
-            self.value_type = "-bool"
-            self.value = self.normalize_bool_value(value)
+            self._value_type = "-bool"
+            self._value = self.normalize_bool_value(value)
         elif value_type in ("-date", "-array-add", "-dict", "-dict-add"):
             raise NotImplementedError(
                 "{} type processing is not implemented".format(value_type)
@@ -89,26 +95,33 @@ class Defaults_Cmd(Cmd):
         else:
             raise TypeError("{} is not a valid type".format(value_type))
 
-    def get_cmd(self):
+    def build_get_cmd(self):
         """The actual defaults command string to execute"""
 
-        c = f"{self.command} {self.get} {self.domain} {self.key}"
-        print(c)
+        return [self._command, self._get, self._domain, self._key]
 
-    def set_cmd(self):
+    def build_set_cmd(self):
         """The actual defaults command string to execute"""
-
-        c = f"{self.command} {self.get} {self.domain} {self.key} {self.value_type} {self.value}"
-        print(c)
+        # return list instead for subprocess.run?
+        return f"{self._command} {self._get} {self._domain} {self._key} {self._value_type} {self._value}"
 
     def get(self):
-        # do I get the value back?
-        subprocess.run(shlex(cmd))
+        # add shlex ??
+        # try:
+        sp = subprocess.run(self.build_get_cmd(), capture_output=True, check=True)
+        sp.check_returncode()
+        value = sp.stdout.decode("utf-8").rstrip("\n")
+        if self._value_type == "-bool":
+            value = self.normalize_bool_value(value)
+        print(" " * 6, "Value is: {}".format(value))
+        return value
 
     def set(self):
         current_value = self.get()
-        if current_value != self.value:
-            subprocess.run(shlex(self.set_cmd))
+        # need to fix floating point comparison.  May be trim get() string or convert to floating point...
+        if current_value != self._value:
+            # subprocess.run(shlex(self.build_set_cmd))
+            print("would change to {}".format(self._value))
             # try
             # logging
             # if command or shell or sudo

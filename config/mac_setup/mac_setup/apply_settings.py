@@ -19,9 +19,11 @@
 
 from argparse import ArgumentParser
 from csv import DictReader, register_dialect
+from functools import partial
 from grp import getgrnam
 from os import getlogin
 from os.path import dirname, join
+from subprocess import CalledProcessError
 from sys import stderr
 
 from mac_setup.commands import Defaults_Cmd
@@ -35,8 +37,10 @@ def is_admin():
     return getlogin() in getgrnam("admin").gr_mem
 
 
-def printerr(*args, **kwargs):
-    print(">" * 2, *args, **kwargs, file=stderr)
+# def printerr(*args, **kwargs):
+#     print(">" * 2, *args, **kwargs, file=stderr)
+
+printerr = partial(print, ">" * 2, file=stderr)
 
 
 def printq(quiet_arg, *args, **kwargs):
@@ -86,7 +90,8 @@ def main():
             printq(args.quiet, " " * 4, "working: {}".format(cursor))
             try:
                 c = Defaults_Cmd(**row)
-                c.get_cmd()
+                c.get()
+                c.set()
             except TypeError:
                 printerr(
                     "Line {}: Domain/key: {}: Check for missing ','s".format(
@@ -99,8 +104,12 @@ def main():
                     "Line {}: Domain/key: {}: Check for missing ','s".format(
                         line, cursor
                     ),
-                    sep = "",
+                    sep="",
                 )
+            except CalledProcessError:
+                pass
+            except NotImplementedError:
+                printerr("Standby while more code is written...")
 
 
 if __name__ == "__main__":
