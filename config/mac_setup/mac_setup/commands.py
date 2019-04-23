@@ -1,5 +1,6 @@
 import shlex
-import subprocess
+from functools import partial
+from subprocess import run
 
 
 class Cmd:
@@ -44,6 +45,9 @@ class Cmd:
 class Defaults_Cmd(Cmd):
     """For 'defaults' command settings."""
 
+    _timeout = 30  # seconds
+    run_subprocess = partial(run, capture_output=True, check=True)
+
     def __init__(self, domain, key, value_type, value, description):
         """Create a new instance of a defaults preference.
         Must provide a domain, domain key and value.
@@ -61,7 +65,7 @@ class Defaults_Cmd(Cmd):
     #     raise NotImplementedError("__repr__ is not implemented yet")
 
     def __str__(self):
-        return f"{self.command} {self._get} {self._domain} {self._key}"
+        return f"{self._command} {self._get} {self._domain} {self._key}"
 
     def __eq__(self, other):
         raise NotImplementedError("__eq__ is not implemented yet")
@@ -79,12 +83,18 @@ class Defaults_Cmd(Cmd):
         # defaults man page lists types as:
         #   -string, -data, -int[eger], -float, -bool[ean], -date, -array-add, -dict, -dict-add
         # Normalize boolean values to "0" or "1" to match values returned by 'defaults read'.
-        if value_type in ("-string", "-data", "-float", "-date"):
+        if value_type in ("-string", "-data", "-date"):
             self._value_type = value_type
             self._value = value
         elif value_type in ("-int", "-integer"):
             self._value_type = "-int"
             self._value = value
+        elif value_type == "-float":
+            self._value_type = value_type
+            self._value = value
+            if self._value[0] == ".":
+                # Add leading 0 before decimal point if missing
+                self._value = "0" + self._value
         elif value_type in ("-bool", "-boolean"):
             self._value_type = "-bool"
             self._value = self.normalize_bool_value(value)
@@ -102,26 +112,59 @@ class Defaults_Cmd(Cmd):
 
     def build_set_cmd(self):
         """The actual defaults command string to execute"""
-        # return list instead for subprocess.run?
-        return f"{self._command} {self._get} {self._domain} {self._key} {self._value_type} {self._value}"
+        return [
+            self._command,
+            self._set,
+            self._domain,
+            self._key,
+            self._value_type,
+            self._value,
+        ]
 
     def get(self):
+        """Caller catches exception."""
         # add shlex ??
-        # try:
-        sp = subprocess.run(self.build_get_cmd(), capture_output=True, check=True)
+        sp = Defaults_Cmd.run_subprocess(self.build_get_cmd())
         sp.check_returncode()
         value = sp.stdout.decode("utf-8").rstrip("\n")
         if self._value_type == "-bool":
             value = self.normalize_bool_value(value)
-        print(" " * 6, "Value is: {}".format(value))
+        elif self._value_type == "-float":
+            value = value[0 : len(self._value)]
+        # print(" " * 6, "Value is: {}".format(value))
         return value
 
-    def set(self):
+    def set(self, quiet=False, dry_run=False):
         current_value = self.get()
-        # need to fix floating point comparison.  May be trim get() string or convert to floating point...
         if current_value != self._value:
-            # subprocess.run(shlex(self.build_set_cmd))
-            print("would change to {}".format(self._value))
-            # try
-            # logging
-            # if command or shell or sudo
+            if not dry_run:
+                sp = Defaults_Cmd.run_subprocess(self.build_set_cmd())
+                sp.check_returncode()
+            if not quiet:
+                print(
+                    " " * 6,
+                    "{} | {}: New value: {} Old value: {}".format(
+                        self._domain, self._key, self._value, current_value
+                    ),
+                )
+            elif dry_run:
+                print(
+                    " " * 4,
+                    "{} | {} would be changed from to {} from {}".format(
+                        self._domain, self._key, self._value, current_value
+                    ),
+                )
+            # Add logging
+
+    def describe(self):
+        print(self._domain, self._key, self._value_type, self._value)
+        print(" " * 4, self._description)
+        print()
+
+
+# for sudo, beware the exception trace.
+# See https://alexwlchan.net/2018/05/beware-logged-errors/
+# try:
+#     subprocess.check_call(sensitive_command)
+# except subprocess.CalledProcessError:
+#     raise RuntimeError("The sensitive command failed!") from None

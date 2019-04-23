@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# $ python3 -m mac_setup.apply_settings
+# $ python3 -m mac_setup.apply_settings (from parent directory of this file)
 
 #
 # Resources:
@@ -23,7 +23,7 @@ from functools import partial
 from grp import getgrnam
 from os import getlogin
 from os.path import dirname, join
-from subprocess import CalledProcessError
+from subprocess import CalledProcessError, TimeoutExpired
 from sys import stderr
 
 from mac_setup.commands import Defaults_Cmd
@@ -36,9 +36,6 @@ def is_admin():
     """
     return getlogin() in getgrnam("admin").gr_mem
 
-
-# def printerr(*args, **kwargs):
-#     print(">" * 2, *args, **kwargs, file=stderr)
 
 printerr = partial(print, ">" * 2, file=stderr)
 
@@ -67,13 +64,30 @@ def main():
         "-dryrun",
         action="store_true",
         default=False,
-        help="Simulate and report the changes, but do not make them.",
+        help="Report the changes, but do not make them.",
     )
     verbose_or_silent.add_argument(
         "-quiet", action="store_true", default=False, help="""Operate in quiet mode."""
     )
+
+    describe_or_interactive = parser.add_mutually_exclusive_group()
+    describe_or_interactive.add_argument(
+        "-describe",
+        action="store_true",
+        default=False,
+        help="Display short description for each settings.",
+    )
+    describe_or_interactive.add_argument(
+        "-interactive",
+        action="store_true",
+        default=False,
+        help="Ask user whether to accept each change for each setting.",
+    )
+
     args = parser.parse_args()
 
+    if args.dryrun:
+        print("Performing a dry run - no changes will be made.")
     csv = "defaults.csv"
     register_dialect("comma-space", delimiter=",", skipinitialspace=True)
     with open(
@@ -87,14 +101,18 @@ def main():
         for row in reader:
             line += 1
             cursor = row["domain"] + " | " + row["key"]
-            printq(args.quiet, " " * 4, "working: {}".format(cursor))
             try:
                 c = Defaults_Cmd(**row)
-                c.get()
-                c.set()
+                if args.describe:
+                    c.describe()
+                elif args.interactive:
+                    raise NotImplementedError
+                else:
+                    printq(args.quiet, " " * 4, "working: {}".format(cursor))
+                    c.set(quiet=args.quiet, dry_run=args.dryrun)
             except TypeError:
                 printerr(
-                    "Line {}: Domain/key: {}: Check for missing ','s".format(
+                    "Line {}: Domain/key: {}: Check for missing ',' delimiter".format(
                         line, cursor
                     ),
                     sep="",
@@ -107,7 +125,11 @@ def main():
                     sep="",
                 )
             except CalledProcessError:
-                pass
+                # figure out what to report
+                printerr("Line {}: Called Process Error ...".format(line))
+            except TimeoutExpired:
+                # figure out what to report
+                printerr("Line {}: Timeout Expired...".format(line))
             except NotImplementedError:
                 printerr("Standby while more code is written...")
 
