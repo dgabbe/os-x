@@ -5,8 +5,10 @@
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
+#   - Patrick Wardell's tool https://objective-see.com/products/lockdown.html
 #
 #   - http://www.defaults-write.com/10-terminal-commands-to-speed-up-your-mac-in-os-x-el-capitan/
+#   - https://zerotoroot.me/hardening-macos-part-1/
 #   - https://gist.github.com/benfrain/7434600
 #   - https://gist.github.com/mbinna/2357277
 #   - https://github.com/drduh/

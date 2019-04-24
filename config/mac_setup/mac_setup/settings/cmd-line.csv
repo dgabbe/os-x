@@ -1,6 +1,3 @@
-command, description
-chflags nohidden ~/Library, "Show the ~/Library folder"
-
 defaults write com.apple.screencapture location <new path>/; killall SystemUIServer",
 "Change the location for saving screenshots",
 

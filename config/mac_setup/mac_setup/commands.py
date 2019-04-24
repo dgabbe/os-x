@@ -69,7 +69,6 @@ class Defaults_Cmd(Cmd):
 
     def __eq__(self, other):
         raise NotImplementedError("__eq__ is not implemented yet")
-        pass
 
     def normalize_bool_value(self, bool_value):
         if bool_value.upper() in ("0", "NO", "FALSE"):
