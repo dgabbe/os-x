@@ -8,7 +8,6 @@
 #   - Patrick Wardell's tool https://objective-see.com/products/lockdown.html
 #
 #   - http://www.defaults-write.com/10-terminal-commands-to-speed-up-your-mac-in-os-x-el-capitan/
-#   - https://zerotoroot.me/hardening-macos-part-1/
 #   - https://gist.github.com/benfrain/7434600
 #   - https://gist.github.com/mbinna/2357277
 #   - https://github.com/drduh/
@@ -17,6 +16,7 @@
 #   - https://github.com/paulirish/dotfiles
 #   - https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
 #   - https://pawelgrzybek.com/change-macos-user-preferences-via-command-line/
+#   - https://zerotoroot.me/hardening-macos-part-1/
 #
 
 from argparse import ArgumentParser
@@ -47,10 +47,22 @@ def printq(quiet_arg, *args, **kwargs):
         print(*args, **kwargs)
 
 
+def prologue():
+    # AppleScript to close System Preferences
+    pass
+
+
+def epilogue(describe, dry_run):
+    """Complete setup by restarting specific services to pickup changes."""
+    if (not describe or not dry_run):
+        # killall SystemUIServer
+        pass
+
+
 def main():
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
-        description="""Tailor MacOS settings for better performance and better default behavior""",
+        description="""Tailor MacOS settings for better performance and default behavior""",
         epilog="""Only settings that need changing need are executed. Changes are logged to <<fill in>>. 
         The format for the csv file is <<fill in later>>""",
     )
@@ -88,6 +100,7 @@ def main():
 
     args = parser.parse_args()
 
+    prologue()
     if args.dryrun:
         print("Performing a dry run - no changes will be made.")
     csv = "defaults.csv"
@@ -112,16 +125,9 @@ def main():
                 else:
                     printq(args.quiet, " " * 4, "working: {}".format(cursor))
                     c.set(quiet=args.quiet, dry_run=args.dryrun)
-            except TypeError:
+            except (TypeError, ValueError):
                 printerr(
                     "Line {}: Domain/key: {}: Check for missing ',' delimiter".format(
-                        line, cursor
-                    ),
-                    sep="",
-                )
-            except ValueError:
-                printerr(
-                    "Line {}: Domain/key: {}: Check for missing ','s".format(
                         line, cursor
                     ),
                     sep="",
@@ -134,6 +140,8 @@ def main():
                 printerr("Line {}: Timeout Expired...".format(line))
             except NotImplementedError:
                 printerr("Standby while more code is written...")
+
+    epilogue(args.describe, args.dryrun)
 
 
 if __name__ == "__main__":

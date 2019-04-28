@@ -1,3 +1,4 @@
-defaults write com.apple.screencapture location <new path>/; killall SystemUIServer",
-"Change the location for saving screenshots",
+com.apple.screencapture location -string $DOWNLOADS/_screenshots, "Change location to save screenshots"
+
+
 
