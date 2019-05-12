@@ -2,6 +2,8 @@
 
 # $ python3 -m mac_setup.apply_settings (from parent directory of this file)
 
+# debug seg fault: https://stackoverflow.com/questions/10035541/what-causes-a-python-segmentation-fault
+
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
