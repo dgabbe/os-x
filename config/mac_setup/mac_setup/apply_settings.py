@@ -2,6 +2,10 @@
 
 # $ python3 -m mac_setup.apply_settings (from parent directory of this file)
 
+# Build as an exe:
+#   cd ~/_git/_os-x/config/mac_setup
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output mac_setup/apply_settings.py --standalone
+
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
@@ -24,7 +28,7 @@ from csv import DictReader, register_dialect
 from functools import partial
 from grp import getgrnam
 from os import getlogin
-from os.path import dirname, join
+from os.path import abspath, dirname, join
 from subprocess import CalledProcessError, TimeoutExpired
 from sys import stderr
 
@@ -56,6 +60,7 @@ def epilogue(describe, dry_run):
     """Complete setup by restarting specific services to pickup changes."""
     if (not describe or not dry_run):
         # killall SystemUIServer
+        # killall Finder
         pass
 
 
@@ -105,8 +110,9 @@ def main():
         print("Performing a dry run - no changes will be made.")
     csv = "defaults.csv"
     register_dialect("comma-space", delimiter=",", skipinitialspace=True)
+    printerr(join(dirname(abspath(__file__)), "settings", csv)) # debug
     with open(
-        join(dirname(__file__), "settings/{}".format(csv)), newline=""
+        join(dirname(abspath(__file__)), "settings", csv), newline=""
     ) as csvfile:
         reader = DictReader(csvfile, dialect="comma-space")
         row_count = sum(1 for row in csvfile)
@@ -144,7 +150,7 @@ def main():
     epilogue(args.describe, args.dryrun)
 
 
-if __name__ == "__main__":
-    main()
-else:
-    printerr("** Did not plan on being imported **")
+# if __name__ == "__main__":
+#     main()
+# else:
+#     printerr("** Did not plan on being imported **")
