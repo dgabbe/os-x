@@ -2,6 +2,11 @@
 
 # $ python3 -m mac_setup.apply_settings (from parent directory of this file)
 
+# Build as an exe:
+#   cd ~/_git/_os-x/config/mac_setup
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output mac_setup/apply_settings.py --standalone
+# Also see nmake.sh in repo.
+
 # debug seg fault: https://stackoverflow.com/questions/10035541/what-causes-a-python-segmentation-fault
 
 #
@@ -65,7 +70,7 @@ def main():
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
         description="""Tailor MacOS settings for better performance and default behavior""",
-        epilog="""Only settings that need changing need are executed. Changes are logged to <<fill in>>. 
+        epilog="""Only settings that need changing need are executed. Changes are logged to <<fill in>>.
         The format for the csv file is <<fill in later>>""",
     )
     parser.add_argument(
