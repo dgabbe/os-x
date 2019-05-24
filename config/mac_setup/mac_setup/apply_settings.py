@@ -31,7 +31,7 @@ from csv import DictReader, register_dialect
 from functools import partial
 from grp import getgrnam
 from os import getlogin
-from os.path import dirname, join
+from os.path import abspath, dirname, join
 from subprocess import CalledProcessError, TimeoutExpired
 from sys import stderr
 
@@ -67,6 +67,7 @@ def epilogue(describe, dry_run):
 
 
 def main():
+    print("DEBUG: {} parent of settings/".format(dirname(__file__)))
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
         description="""Tailor MacOS settings for better performance and default behavior""",
@@ -113,7 +114,7 @@ def main():
     csv = "defaults.csv"
     register_dialect("comma-space", delimiter=",", skipinitialspace=True)
     with open(
-        join(dirname(__file__), "settings/{}".format(csv)), newline=""
+        join(abspath(dirname(__file__)), "settings", csv), newline=""
     ) as csvfile:
         reader = DictReader(csvfile, dialect="comma-space")
         row_count = sum(1 for row in csvfile)
