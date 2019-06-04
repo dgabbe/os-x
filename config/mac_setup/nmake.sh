@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# To make a Mac app: https://mathiasbynens.be/notes/shell-script-mac-apps
+#
+
 file="mac_setup/apply_settings.py"
 
 show_progress_args="--show-progress"
