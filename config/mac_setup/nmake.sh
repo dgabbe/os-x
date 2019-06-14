@@ -6,12 +6,11 @@
 
 file="mac_setup/apply_settings.py"
 
-show_progress_args="--show-progress"
-imports_args="--follow-imports"
 app_args="--standalone"
-debug_args=""
 compile_args="--remove-output"
-
+debug_args=""
+imports_args="--follow-imports"
+show_progress_args="--show-progress"
 
 python3 -m nuitka ${imports_args} ${show_progress_args} --python-flag=no_site ${debug_args} ${compile_args}  \
 ${app_args} ${file}

@@ -4,3 +4,6 @@ config/mac_setup/apply_settings.dist
 config/mac_setup/.idea
 config/standard_tweaks/.idea
 os-x-config/.idea
+config/mac_setup/dist
+^\.idea
+config/.idea
