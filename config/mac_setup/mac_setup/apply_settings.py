@@ -10,6 +10,9 @@
 # debug seg fault: https://stackoverflow.com/questions/10035541/what-causes-a-python-segmentation-fault
 
 #
+# To run from the terminal:
+#   $ open -a /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal apply_settings --args -h
+#
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
 #   - Patrick Wardell's tool https://objective-see.com/products/lockdown.html
@@ -128,7 +131,7 @@ def main():
             try:
                 c = Defaults_Cmd(**row)
                 if args.describe:
-                    c.describe()
+                    c.describe(line_number = line)
                 elif args.interactive:
                     raise NotImplementedError
                 else:

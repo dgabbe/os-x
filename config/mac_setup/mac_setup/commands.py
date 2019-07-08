@@ -65,6 +65,7 @@ class Defaults_Cmd(Cmd):
     #     raise NotImplementedError("__repr__ is not implemented yet")
 
     def __str__(self):
+        # Think about including _value_type & _value
         return f"{self._command} {self._get} {self._domain} {self._key}"
 
     def __eq__(self, other):
@@ -130,7 +131,6 @@ class Defaults_Cmd(Cmd):
             value = self.normalize_bool_value(value)
         elif self._value_type == "-float":
             value = value[0 : len(self._value)]
-        # print(" " * 6, "Value is: {}".format(value))
         return value
 
     def set(self, quiet=False, dry_run=False):
@@ -155,8 +155,11 @@ class Defaults_Cmd(Cmd):
                 )
             # Add logging
 
-    def describe(self):
-        print(self._domain, self._key, self._value_type, self._value)
+    def describe(self, line_number = None):
+        prefix = ''
+        if (line_number):
+            prefix = "{}:".format(line_number)
+        print(prefix, self._domain, self._key, self._value_type, self._value)
         print(" " * 4, self._description)
         print()
 
