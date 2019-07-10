@@ -7,3 +7,4 @@ os-x-config/.idea
 config/mac_setup/dist
 ^\.idea
 config/.idea
+config/mac_setup/apply_settings.app
