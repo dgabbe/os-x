@@ -7,8 +7,6 @@
 #   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output mac_setup/apply_settings.py --standalone
 # Also see nmake.sh in repo.
 
-# debug seg fault: https://stackoverflow.com/questions/10035541/what-causes-a-python-segmentation-fault
-
 #
 # To run from the terminal:
 #   $ open -a /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal apply_settings --args -h

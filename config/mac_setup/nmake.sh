@@ -4,6 +4,11 @@
 # To make a Mac app: https://mathiasbynens.be/notes/shell-script-mac-apps
 #
 
+#
+# Hints for making a MacOS app bundle
+# - https://stackoverflow.com/questions/1596945/building-osx-app-bundle
+#
+
 file="mac_setup/apply_settings.py"
 
 app_args="--standalone"
