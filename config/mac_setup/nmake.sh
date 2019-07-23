@@ -6,7 +6,9 @@
 
 #
 # Hints for making a MacOS app bundle
+# - https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html#//apple_ref/doc/uid/10000123i-CH101-SW19
 # - https://stackoverflow.com/questions/1596945/building-osx-app-bundle
+# - https://medium.com/@mattholt/packaging-a-go-application-for-macos-f7084b00f6b5
 #
 
 file="mac_setup/apply_settings.py"
