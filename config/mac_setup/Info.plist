@@ -20,7 +20,7 @@
   <key>CFBundleExecutable</key>
   <string>apply_settings</string>
 
-  <key>CFBundleSignature<key>
+  <key>CFBundleSignature</key>
   <string>ttxt</string> <!-- for testing -->
 
 <!--
@@ -28,12 +28,9 @@
   <string>foo.icns</string>
  -->
 
-<!--
   <key>CFBundleShortVersionString</key>
   <string>0.01</string>
- -->
 
-<!--
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
 
@@ -42,6 +39,5 @@
 
   <key>IFMinorVersion</key>
   <integer>1</integer>
- -->
 </dict>
 </plist>
