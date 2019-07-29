@@ -4,7 +4,7 @@
 
 # Test idea of opening a shell script...
 
-cd ${HOME}/_git/_os-x/config/mac_setup/apply_settings.dist
+cd ${HOME}/_git/_os-x/config/mac_setup/macos_settings.dist
 echo "I am here: $PWD"
 
 echo

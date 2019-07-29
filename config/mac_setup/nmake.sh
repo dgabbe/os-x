@@ -11,7 +11,7 @@
 # - https://medium.com/@mattholt/packaging-a-go-application-for-macos-f7084b00f6b5
 #
 
-file="mac_setup/apply_settings.py"
+file="mac_setup/macos_settings.py"
 
 app_args="--standalone"
 compile_args="--remove-output"
@@ -25,5 +25,7 @@ ${app_args} ${file}
 # Nuitka won't move settings into .dist folder
 
 cp -pvR ./mac_setup/settings apply_settings.dist/
+
+## add steps to make a .app bundle
 
 unset file
