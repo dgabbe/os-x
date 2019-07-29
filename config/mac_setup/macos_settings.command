@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-
+# open -a /Applications/Utilities/Terminal.app/ macos_settings
 
 # Test idea of opening a shell script...
 
-cd ${HOME}/_git/_os-x/config/mac_setup/macos_settings.dist
+cd ${HOME}/_git/_os-x/config/mac_setup/macos_settings.app/Contents/MacOS/
 echo "I am here: $PWD"
 
 echo
@@ -16,7 +16,7 @@ echo
 read -p "Do you want to proceed? [y/n] " answer
 case $answer in
    [yY]* ) echo "..."
-           ./apply_settings
+           ./macos_settings.py
            ;;
 
    [nN]* ) exit;;
