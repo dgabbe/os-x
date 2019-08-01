@@ -111,6 +111,17 @@ def main():
     args = parser.parse_args()
 
     prologue()
+
+    #
+    # begin: testing asking for input
+    #
+    answer = input("About to make some changes to your system [y|n]: ")
+    if (answer == 'n'):
+        # should be sys.exit
+        return
+    #
+    # end: testing asking for input
+    #
     if args.dryrun:
         print("Performing a dry run - no changes will be made.")
     csv = "defaults.csv"
