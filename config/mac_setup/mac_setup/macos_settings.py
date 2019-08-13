@@ -35,9 +35,19 @@ from grp import getgrnam
 from os import getlogin
 from os.path import abspath, dirname, join
 from subprocess import CalledProcessError, TimeoutExpired
-from sys import stderr
+from sys import exit, stderr, path
 
 from mac_setup.commands import Defaults_Cmd
+
+path.extend(["/Users/dgabbe/_git/_python/dglogger"])
+import dglogger
+
+
+def epilogue(describe, dry_run):
+    """Complete setup by restarting specific services to pickup changes."""
+    if not describe or not dry_run:
+        # killall SystemUIServer
+        pass
 
 
 def is_admin():
@@ -56,20 +66,16 @@ def printq(quiet_arg, *args, **kwargs):
         print(*args, **kwargs)
 
 
-def prologue():
-    # AppleScript to close System Preferences
-    pass
-
-
-def epilogue(describe, dry_run):
-    """Complete setup by restarting specific services to pickup changes."""
-    if (not describe or not dry_run):
-        # killall SystemUIServer
+def prologue(describe: object, dry_run: object) -> object:
+    if not describe or not dry_run:
+        # AppleScript to close System Preferences
         pass
 
 
 def main():
-    print("DEBUG: {} parent of settings/".format(dirname(__file__)))
+    printerr(
+        "DEBUG: {} parent of settings/".format(dirname(__file__))
+    )  # should really be a dglogger call!
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
         description="""Tailor MacOS settings for better performance and default behavior""",
@@ -110,25 +116,20 @@ def main():
 
     args = parser.parse_args()
 
-    prologue()
+    print("    About to optimize some settings for your account.")
+    print("    Any changes are displayed on screen and written to a log file. ")
+    print("    Use the Console utility to view the log file.")
+    # answer = input("Proceed [y|n]? ")
+    # if answer == "n": # weak test - replsys.path.extend(['/Users/dgabbe/_git/_python/dglogger'])ace w/better way
+    #     exit("... No Change; no problem.")
 
-    #
-    # begin: testing asking for input
-    #
-    answer = input("About to make some changes to your system [y|n]: ")
-    if (answer == 'n'):
-        # should be sys.exit
-        return
-    #
-    # end: testing asking for input
-    #
+    prologue(args.describe, args.dryrun)
+
     if args.dryrun:
         print("Performing a dry run - no changes will be made.")
     csv = "defaults.csv"
     register_dialect("comma-space", delimiter=",", skipinitialspace=True)
-    with open(
-        join(abspath(dirname(__file__)), "settings", csv), newline=""
-    ) as csvfile:
+    with open(join(abspath(dirname(__file__)), "settings", csv), newline="") as csvfile:
         reader = DictReader(csvfile, dialect="comma-space")
         row_count = sum(1 for row in csvfile)
         print(" " * 2, "{}: Reviewing {} settings...".format(csv, row_count - 1))
@@ -140,7 +141,7 @@ def main():
             try:
                 c = Defaults_Cmd(**row)
                 if args.describe:
-                    c.describe(line_number = line)
+                    c.describe(line_number=line)
                 elif args.interactive:
                     raise NotImplementedError
                 else:

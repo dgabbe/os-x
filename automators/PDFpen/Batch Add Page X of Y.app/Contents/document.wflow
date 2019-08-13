@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>419</string>
+	<string>444.7</string>
 	<key>AMApplicationVersion</key>
-	<string>2.6</string>
+	<string>2.8</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -103,7 +103,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>344.500000:170.000000</string>
+				<string>309.000000:170.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Folder Contents.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -207,7 +207,7 @@
 					</data>
 				</dict>
 				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.Filter_Finder_Items_2</string>
+				<string>com.apple.Automator.FilterFinderItems2</string>
 				<key>CFBundleVersion</key>
 				<string>2.1.1</string>
 				<key>CanShowSelectedItemsWhenRun</key>
@@ -265,7 +265,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>344.500000:330.000000</string>
+				<string>309.000000:330.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Filter Finder Items 2.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -332,7 +332,7 @@
 					<key>batchItems</key>
 					<integer>1</integer>
 					<key>documentPath</key>
-					<string>/Volumes/Mini-HD2/Users2/dgabbe/_git/_os-x/automators/PDFpen/_single file/Add Page X of Y.workflow</string>
+					<string>~/_git/_os-x/automators/PDFpen/_single file/Add Page X of Y.workflow</string>
 					<key>itemsBatchSize</key>
 					<integer>1</integer>
 					<key>numberOfWorkflows</key>
@@ -452,7 +452,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>344.500000:517.000000</string>
+				<string>309.000000:517.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Workflow.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -462,19 +462,19 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>B5F22528-E3C2-407E-9042-469B846900BE</key>
-		<dict>
-			<key>from</key>
-			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
-			<key>to</key>
-			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
-		</dict>
-		<key>D1DDEDF2-F4BC-4F17-BA75-E90EF78CC6B9</key>
+		<key>D0AF32DF-7154-4443-ACA1-2F11DFCEA3E6</key>
 		<dict>
 			<key>from</key>
 			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
 			<key>to</key>
 			<string>4AFA3016-356D-44C0-8C64-7D6F635FE60D - 4AFA3016-356D-44C0-8C64-7D6F635FE60D</string>
+		</dict>
+		<key>F0600493-77AF-45E4-932B-E664050C57CA</key>
+		<dict>
+			<key>from</key>
+			<string>68ED1EB8-3A61-40AF-B80C-BEC908638DC1 - 68ED1EB8-3A61-40AF-B80C-BEC908638DC1</string>
+			<key>to</key>
+			<string>ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C - ED91EF21-1903-4F44-A1AA-C0E1A8BCD36C</string>
 		</dict>
 	</dict>
 	<key>variables</key>
