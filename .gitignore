@@ -10,3 +10,4 @@ config/.idea
 config/mac_setup/apply_settings.app
 config/mac_setup/macos_settings.app
 config/mac_setup/macos_settings.dist
+config/mac_setup/nuitka

@@ -11,19 +11,20 @@
 # - https://medium.com/@mattholt/packaging-a-go-application-for-macos-f7084b00f6b5
 #
 
+# add environment setup here
+# source nuitka/bin/activate
+
 file="mac_setup/macos_settings.py"
 
 app_args="--standalone"
 compile_args="--remove-output"
-debug_args=""
 imports_args="--follow-imports"
 show_progress_args="--show-progress"
 
-python3 -m nuitka ${imports_args} ${show_progress_args} --python-flag=no_site ${debug_args} ${compile_args}  \
+python3 -m nuitka ${imports_args} ${show_progress_args} --python-flag=no_site ${compile_args}  \
 ${app_args} ${file}
 
 # Nuitka won't move settings into .dist folder
-
 cp -pvR ./mac_setup/settings macos_settings.dist/
 
 ## add steps to make a .app bundle

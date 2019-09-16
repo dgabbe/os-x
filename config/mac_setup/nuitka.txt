@@ -1,0 +1,2 @@
+-r dev.txt
+nuitka>=0.6.5
