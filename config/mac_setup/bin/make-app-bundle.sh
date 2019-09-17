@@ -9,14 +9,16 @@
 
 # check on whether cp preserves or creates new file creation date.
 
+
 # verify .dist file exists
 # verify app directory exists
 #    create if it doesn't
-# stripe file name from .dist
+# app-name = stripe file name from .dist
+# app_path = './app/'
+# build_path = './app/builds/app-name.app/'
 # move existing file to old file - append date/time to end
-# mkdir -p app-dir/app-name.app/Contents/MacOS
-# mkdir app-name/Resources
-# cp Info.plist app-dir/app-name.app
-# cp -r Resources app-dir/app-name.app/Contents/Resources
-# mv -r app-name.dist/* app-dir/app-name.app/Contents/MacOS
-
+# mkdir -p ${build_path}/Contents/MacOS
+# mkdir -p ${build_path}/Resources
+# cp -r ${app_path}/Contents/ ${build_path}/Contents/
+# cp -r ${app_path}/Resources ${build_path}/Contents/Resources
+# mv -r ${app_name}.dist/* ${build_path}/Contents/MacOS/
