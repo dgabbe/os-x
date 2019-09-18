@@ -1,0 +1,2 @@
+-r dev-requirements.txt
+nuitka>=0.6.5

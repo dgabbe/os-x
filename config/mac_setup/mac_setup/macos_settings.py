@@ -58,9 +58,6 @@ def is_admin():
     return getlogin() in getgrnam("admin").gr_mem
 
 
-printerr = partial(print, ">" * 2, file=stderr)
-
-
 def printq(quiet_arg, *args, **kwargs):
     if not quiet_arg:
         print(*args, **kwargs)
