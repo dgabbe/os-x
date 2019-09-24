@@ -1,15 +1,15 @@
 #! /usr/bin/env python3
 
-# $ python3 -m mac_setup.apply_settings (from parent directory of this file)
+# $ python3 -m mac_setup.macos_settings (from parent directory of this file)
 
 # Build as an exe:
 #   cd ~/_git/_os-x/config/mac_setup
-#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output mac_setup/apply_settings.py --standalone
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output mac_setup/macos_settings.py --standalone
 # Also see nmake.sh in repo.
 
 #
 # To run from the terminal:
-#   $ open -a /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal apply_settings --args -h
+#   $ open -a /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal macos_settings --args -h
 #
 # Resources:
 #   - https://developer.apple.com/documentation/foundation/nsuserdefaults
@@ -30,7 +30,7 @@
 
 from argparse import ArgumentParser
 from csv import DictReader, register_dialect
-from functools import partial
+from dglogger import log_config, log_start, log_end, log_dev
 from grp import getgrnam
 from os import getlogin
 from os.path import abspath, dirname, join
@@ -38,10 +38,6 @@ from subprocess import CalledProcessError, TimeoutExpired
 from sys import exit, stderr, path
 
 from mac_setup.commands import Defaults_Cmd
-
-path.extend(["/Users/dgabbe/_git/_python/dglogger"])
-import dglogger
-
 
 def epilogue(describe, dry_run):
     """Complete setup by restarting specific services to pickup changes."""
@@ -70,9 +66,9 @@ def prologue(describe: object, dry_run: object) -> object:
 
 
 def main():
-    printerr(
-        "DEBUG: {} parent of settings/".format(dirname(__file__))
-    )  # should really be a dglogger call!
+    log_config()
+    log_start()
+    log_dev("DEBUG: {} parent of settings/".format(dirname(__file__)))
     parser = ArgumentParser(
         prog="Apply MacOS Settings",
         description="""Tailor MacOS settings for better performance and default behavior""",
@@ -161,6 +157,7 @@ def main():
                 printerr("Standby while more code is written...")
 
     epilogue(args.describe, args.dryrun)
+    log_end()
 
 
 if __name__ == "__main__":
