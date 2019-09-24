@@ -1,1 +1,2 @@
 # Base Python 3.7.x installation
+git+https://github.com/dgabbe/dglogger
