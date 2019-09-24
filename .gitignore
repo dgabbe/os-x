@@ -1,14 +1,9 @@
-
-config/mac_setup/apply_settings.dist
 50min.tmr
 config/mac_setup/.idea
 config/standard_tweaks/.idea
 os-x-config/.idea
-config/mac_setup/dist
 ^\.idea
 config/.idea
-config/mac_setup/apply_settings.app
-config/mac_setup/macos_settings.app
 config/mac_setup/macos_settings.dist
 config/mac_setup/nuitka
-config/mac_setup/app/builds/macos_settings.app.keep.app
+config/mac_setup/app/builds
