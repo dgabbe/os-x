@@ -27,6 +27,4 @@ ${app_args} ${file}
 # Nuitka won't move settings into .dist folder
 cp -pvR ./mac_setup/settings macos_settings.dist/
 
-## add steps to make a .app bundle
-
 unset file
