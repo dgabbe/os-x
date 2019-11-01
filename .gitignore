@@ -7,3 +7,4 @@ config/.idea
 config/mac_setup/macos_settings.dist
 config/mac_setup/nuitka
 config/mac_setup/app/builds
+config/mac_setup/apply_settings.app
