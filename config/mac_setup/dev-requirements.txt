@@ -1,4 +1,5 @@
 -r requirements.txt
 black>=19.3b0
+docutils
 pipreqs>=0.4.9
 pytest>=5.1.2
