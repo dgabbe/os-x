@@ -1,32 +1,32 @@
 domain, key, value_type, value, description
-com.apple.desktopservices, DSDontWriteNetworkStores, -bool, true, "Avoid creating .DS_Store files on network volumes"
-com.apple.desktopservices, DSDontWriteUSBStores, -bool, true, "Avoid creating .DS_Store files on USB volumes"
-com.apple.Dock, autohide-delay, -float, 0, "Disable the delay when you hide the Dock"
-com.apple.dock, autohide-time-modifier, -float, 0, "Remove the animation when hiding/showing the Dock"
-com.apple.dock, dashboard-in-overlay, -bool, true, "Don’t show Dashboard as a Space"
-com.apple.dock, expose-animation-duration, -float, 0.1, "Make all animations faster that are used by Mission Control."
-com.apple.dock, launchanim, -bool, false, "Disable animations when you open an application from the Dock."
-com.apple.finder, _FXShowPosixPathInTitle, -bool, true, "Show file path in title of finder window"
-com.apple.finder, AppleShowAllFiles, -bool, true, "Show hidden files. Can also use 'chflags nohidden' shell command."
-com.apple.finder, DisableAllAnimations, -bool, true, "Disable animation when opening the Info window in OS X Finder (cmd⌘ + i)."
-com.apple.finder, FXEnableExtensionChangeWarning, -bool, false, "Disable the warning when changing a file extension"
-com.apple.ImageCapture, disableHotPlug, -bool, true, "Prevent Photos from opening automatically when devices are plugged in"
-com.apple.mail, DisableReplyAnimations, -bool, true, "Disable the animation when you replying to an e-mail"
-com.apple.mail, DisableSendAnimations, -bool, true, "Disable the animation when you sending an e-mail"
-com.apple.NetworkBrowser, BrowseAllInterfaces, -bool, true, "Enable AirDrop feature for ethernet connected Macs"
-com.apple.Safari, ShowFullURLInSmartSearchField, -bool, true, "Always show the full URL in the search/url field"
-com.apple.Safari, WebKitInitialTimedLayoutDelay,-float, 0.25, "Disable the standard delay in rendering a Web page."
-com.apple.screencapture, disable-shadow, -bool, true, "Disable shadow in screenshots"
+com.apple.desktopservices, DSDontWriteNetworkStores, -bool, true, Avoid creating .DS_Store files on network volumes
+com.apple.desktopservices, DSDontWriteUSBStores, -bool, true, Avoid creating .DS_Store files on USB volumes
+com.apple.Dock, autohide-delay, -float, 0, Disable the delay when you hide the Dock
+com.apple.dock, autohide-time-modifier, -float, 0, Remove the animation when hiding/showing the Dock
+com.apple.dock, dashboard-in-overlay, -bool, true, Don’t show Dashboard as a Space
+com.apple.dock, expose-animation-duration, -float, 0.1, Make all animations faster that are used by Mission Control.
+com.apple.dock, launchanim, -bool, false, Disable animations when you open an application from the Dock.
+com.apple.finder, _FXShowPosixPathInTitle, -bool, true, Show file path in title of finder window
+com.apple.finder, AppleShowAllFiles, -bool, true, Show hidden files. Can also use 'chflags nohidden' shell command.
+com.apple.finder, DisableAllAnimations, -bool, true, Disable animation when opening the Info window in OS X Finder (cmd⌘ + i).
+com.apple.finder, FXEnableExtensionChangeWarning, -bool, false, Disable the warning when changing a file extension
+com.apple.ImageCapture, disableHotPlug, -bool, true, Prevent Photos from opening automatically when devices are plugged in
+com.apple.mail, DisableReplyAnimations, -bool, true, Disable the animation when you replying to an e-mail
+com.apple.mail, DisableSendAnimations, -bool, true, Disable the animation when you sending an e-mail
+com.apple.NetworkBrowser, BrowseAllInterfaces, -bool, true, Enable AirDrop feature for ethernet connected Macs
+com.apple.Safari, ShowFullURLInSmartSearchField, -bool, true, Always show the full URL in the search/url field
+com.apple.Safari, WebKitInitialTimedLayoutDelay, -float, 0.25, Disable the standard delay in rendering a Web page.
+com.apple.screencapture, disable-shadow, -bool, true, Disable shadow in screenshots
 NSGlobalDomain, AppleShowAllExtensions, -bool, true, "Always display file extensions (.jpg, .txt, .pdf, etc)"
-NSGlobalDomain, AppleShowScrollBars, -string, "Always", "Always show scroll bars"
-NSGlobalDomain, KeyRepeat, -int, 0, "The keyboard react faster to keystrokes (not equally useful for everyone)"
-NSGlobalDomain, NSAutomaticWindowAnimationsEnabled, -bool, false, "Disable animations when opening and closing windows."
-NSGlobalDomain, NSDocumentSaveNewDocumentsToCloud, -bool, false,"Save to disk (not to iCloud) by default"
-NSGlobalDomain, NSNavPanelExpandedStateForSaveMode, -bool, true, "Expand Save panel by default (1/2)"
-NSGlobalDomain, NSNavPanelExpandedStateForSaveMode2, -bool, true, "Expand Save panel by default (2/2)"
-NSGlobalDomain, NSScrollAnimationEnabled, -bool, false, "Disable smooth scrolling for paging (space bar)"
-NSGlobalDomain, NSWindowResizeTime, -float, 0.001, "Accelerated playback when adjusting the window size (Cocoa applications)."
-NSGlobalDomain, PMPrintingExpandedStateForPrint, -bool, true, "Expand Print menu by default (1/2)"
-NSGlobalDomain, PMPrintingExpandedStateforPrint, -bool, true, "Expand Print menu by default (1/2)"
-NSGlobalDomain, PMPrintingExpandedStateForPrint2, -bool, true, "Expand Print menu by default (2/2)"
-NSGlobalDomain, QLPanelAnimationDuration, -float, 0, "Disable animations when opening a Quick Look window."
+NSGlobalDomain, AppleShowScrollBars, -string, Always, Always show scroll bars
+NSGlobalDomain, KeyRepeat, -int, 0, The keyboard react faster to keystrokes (not equally useful for everyone)
+NSGlobalDomain, NSAutomaticWindowAnimationsEnabled, -bool, false, Disable animations when opening and closing windows.
+NSGlobalDomain, NSDocumentSaveNewDocumentsToCloud, -bool, false, Save to disk (not to iCloud) by default
+NSGlobalDomain, NSNavPanelExpandedStateForSaveMode, -bool, true, Expand Save panel by default (1/2)
+NSGlobalDomain, NSNavPanelExpandedStateForSaveMode2, -bool, true, Expand Save panel by default (2/2)
+NSGlobalDomain, NSScrollAnimationEnabled, -bool, false, Disable smooth scrolling for paging (space bar)
+NSGlobalDomain, NSWindowResizeTime, -float, 0.001, Accelerated playback when adjusting the window size (Cocoa applications).
+NSGlobalDomain, PMPrintingExpandedStateForPrint, -bool, true,Expand Print menu by default (1/2)
+NSGlobalDomain, PMPrintingExpandedStateforPrint, -bool, true,Expand Print menu by default (1/2)
+NSGlobalDomain, PMPrintingExpandedStateForPrint2, -bool, true,Expand Print menu by default (2/2)
+NSGlobalDomain, QLPanelAnimationDuration, -float, 0, Disable animations when opening a Quick Look window.
