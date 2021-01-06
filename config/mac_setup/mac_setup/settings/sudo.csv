@@ -1,7 +1,0 @@
-# add columns names!
-"command_line": "sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES",
-"Disable Bonjour multicast advertisements.\n  See https://www.trustwave.com/Resources/SpiderLabs-Blog/mDNS---Telling-the-world-about-you-(and-your-device)/",
-
-"command_line": "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -boolean false",
-"Disable WiFi hotspot screen",
-
